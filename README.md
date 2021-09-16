@@ -8,7 +8,7 @@ Amped's main goal is to help with access to curated content. Users are encourage
 
 ### What does it do?
 
-Amped allows content to be cataloged, rated and shared. But it also serves a second goal: learning by doing! As we are building "Amped" as an app (and hopefully as a small community), we show you all the steps along the way! You will get insight in how the idea got formed and what we did to get where we are. We will be writing about it in blogposts, organizing meetups on related topics, doing live coding sessions, etc.
+Amped allows content to be catalogued, rated and shared. But it also serves a second goal: learning by doing! As we are building "Amped" as an app (and hopefully as a small community), we show you all the steps along the way! You will get insight in how the idea got formed and what we did to get where we are. We will be writing about it in blogposts, organizing meetups on related topics, doing live coding sessions, etc.
 
 ### Why?
 
