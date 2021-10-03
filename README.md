@@ -16,7 +16,9 @@ This project started as input for our meetup content and a nice demo app (no mor
 
 ### Content List and Schedule
 
-Related content will be listed here, coming soon!
+| Content                                               | Description                         |
+| ----------------------------------------------------- | ----------------------------------- |
+| [The Amped personas ](./content/personas/personas.md) | The 5 personas we created for Amped |
 
 ### Open Source
 
