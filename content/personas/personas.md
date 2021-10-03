@@ -4,7 +4,7 @@ We need ways to understand our stakeholders, our users, target audiency, etc. We
 
 Personas help you understand those stakeholders and users and can help avoid creating problematic biased solutions. We think of them as realistic examples of our audience and use them throughout the entire application lifecycle. This means that personas don't have to be complete at the start of a project: they evolve, just like the software does!
 
-When we started thinking about Amped, we created the following 5 personas.
+When we started thinking about Amped, we created the following 5 personas... even in these simple examples, there is plenty of bias. Can you spot it and do you think it is problematic?
 
 ![](shelly.png)
 ![](colin.png)
