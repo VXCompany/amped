@@ -19,6 +19,7 @@ This project started as input for our meetup content and a nice demo app (no mor
 | Content                                               | Description                         |
 | ----------------------------------------------------- | ----------------------------------- |
 | [The Amped personas ](./content/personas/personas.md) | The 5 personas we created for Amped |
+| [CI/CD Design ](./content/designs/1_cicd/cicd.md) | The first proposal on CI/CD for Amped |
 
 ### Open Source
 
