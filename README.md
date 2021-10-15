@@ -19,6 +19,7 @@ This project started as input for our meetup content and a nice demo app (no mor
 | Content                                               | Description                         |
 | ----------------------------------------------------- | ----------------------------------- |
 | [The Amped personas ](./content/personas/personas.md) | The 5 personas we created for Amped |
+| [IaC Design ](./content/designs/2_infra_as_code/infra_as_code.md) | The first proposal on IaC for Amped |
 
 ### Open Source
 
