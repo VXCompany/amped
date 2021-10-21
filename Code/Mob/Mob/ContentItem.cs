@@ -5,19 +5,26 @@ namespace Mob
 {
     public class ContentItem
     {
+        private List<Rating> _ratings = new();
+
+
         public Uri Uri { get; set; }
 
         public string Description { get; set; }
 
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public Rating Rating { get; private set; }
+        public Rating Rating
+        {
+            get
+            {
+                //
+            }
+        }
 
         public void AddRating(Rating rating)
         {
-            Rating = rating;
+            _ratings.Add(rating);
         }
     }
-
-    public record Rating(int Value);
 }
