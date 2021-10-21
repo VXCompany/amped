@@ -10,21 +10,13 @@ namespace Mob
 
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public int Rating { get; private set; }
+        public Rating Rating { get; private set; }
 
-        public void SetRating(int rating)
+        public void SetRating(Rating rating)
         {
-            if (rating > 5)
-            {
-                throw new ArgumentException();
-            }
-
-            if (rating < 1)
-            {
-                throw new ArgumentException();
-            }
-
             Rating = rating;
         }
     }
+
+    public record Rating(int Value);
 }
