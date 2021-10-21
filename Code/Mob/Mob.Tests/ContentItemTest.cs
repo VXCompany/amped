@@ -1,7 +1,5 @@
-using System;
 using FluentAssertions;
 using Xunit;
-using Mob;
 
 namespace Mob.Tests
 {
@@ -16,31 +14,22 @@ namespace Mob.Tests
         }
 
         [Fact]
-        public void NewItemShouldHaveRatingSetTo0()
+        public void NewItemShouldHaveRatingSetBeNull()
         {
             var sut = new ContentItem();
 
-            sut.Rating.Should().Be(0);
-        }
-        
-        [Fact]
-        public void RatingIsNotHigherThenFive()
-        {
-            var sut = new ContentItem();
-            
-            Action action = ()=> sut.SetRating(6);
-            action.Should().Throw<ArgumentException>();
-            
+            sut.Rating.Should().BeNull();
         }
 
         [Fact]
-        public void RatingIsNotLowerThanOne()
+        public void WhenMultipleDifferentRatings_RatingShouldBeAverage()
         {
             var sut = new ContentItem();
+            
+            sut.AddRating(new Rating(2));
+            sut.AddRating(new Rating(4));
 
-            Action action = () => sut.SetRating(0);
-            action.Should().Throw<ArgumentException>();
-
+            sut.Rating.Should().Be(new Rating(3));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Mob
 {
@@ -12,7 +13,7 @@ namespace Mob
 
         public Rating Rating { get; private set; }
 
-        public void SetRating(Rating rating)
+        public void AddRating(Rating rating)
         {
             Rating = rating;
         }
