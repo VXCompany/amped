@@ -1,6 +1,7 @@
 using System;
 using FluentAssertions;
 using Xunit;
+using Mob;
 
 namespace Mob.Tests
 {
@@ -22,6 +23,13 @@ namespace Mob.Tests
             sut.Rating.Should().Be(0);
         }
         
-        
+        [Fact]
+        public void RatingIsNotHigherThenFive()
+        {
+            var sut = new ContentItem();
+            
+            sut.SetRating(6);
+            
+        }
     }
 }
