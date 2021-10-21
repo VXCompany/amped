@@ -19,6 +19,11 @@ namespace Mob
                 throw new ArgumentException();
             }
 
+            if (rating < 1)
+            {
+                throw new ArgumentException();
+            }
+
             Rating = rating;
         }
     }

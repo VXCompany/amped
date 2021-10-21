@@ -28,8 +28,19 @@ namespace Mob.Tests
         {
             var sut = new ContentItem();
             
-            sut.SetRating(6);
+            Action action = ()=> sut.SetRating(6);
+            action.Should().Throw<ArgumentException>();
             
+        }
+
+        [Fact]
+        public void RatingIsNotLowerThanOne()
+        {
+            var sut = new ContentItem();
+
+            Action action = () => sut.SetRating(0);
+            action.Should().Throw<ArgumentException>();
+
         }
     }
 }
