@@ -13,7 +13,10 @@ namespace Amped.API.Tests
         {
             Uri invalidUri = null;
             
-            Action bookmark = () => new Bookmark(invalidUri, DummyOwner);
+            Action bookmark = () => new BookmarkBuilder()
+                .WithUri(invalidUri)
+                .Build();
+
 
             bookmark.Should().Throw<ArgumentNullException>();
         }
@@ -23,33 +26,62 @@ namespace Amped.API.Tests
         {
             var expected = new Uri("http://someuri.com");
             
-            var bookmark = new Bookmark(expected, DummyOwner);
-
+            var bookmark = new BookmarkBuilder()
+                .WithUri(expected)
+                .Build();
+            
             bookmark.Uri.Should().Be(expected);
         }
 
         [Fact]
         public void Should_Set_Read()
         {
-            var uri = new Uri("http://someuri.com");
-            var read = true;
+            const bool read = true;
 
-            var bookmark = new Bookmark(uri, DummyOwner, read);
-
+            var bookmark = new BookmarkBuilder()
+                .WithRead(read)
+                .Build();
+            
             bookmark.Read.Should().Be(true);
         }
 
         [Fact]
         public void Should_Specify_Whos_Bookmark_It_Is()
         {
-            var uri = new Uri("http://someuri.com");
-            var read = true;
-            var parker = "parker";
+            const string parker = "parker";
 
-            var bookmark = new Bookmark(uri, parker, read);
+            var bookmark = new BookmarkBuilder()
+                .WithOwner(parker)
+                .Build();
 
             bookmark.Owner.Should().Be(parker);
         }
+    }
 
+    public class BookmarkBuilder
+    {
+        private Uri _uri = new ("http://someuri.com");
+        private bool _read;
+        private string _owner = "parker";
+
+        public BookmarkBuilder WithUri(Uri uri)
+        {
+            _uri = uri;
+            return this;
+        }
+
+        public BookmarkBuilder WithRead(bool read)
+        {
+            _read = read;
+            return this;
+        }
+        
+        public BookmarkBuilder WithOwner(string owner)
+        {
+            _owner = owner;
+            return this;
+        }
+        
+        public Bookmark Build() => new (_uri, _owner, _read);
     }
 }
