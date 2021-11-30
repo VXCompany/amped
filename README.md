@@ -14,7 +14,7 @@ Amped allows content to be catalogued, rated and shared. But it also serves a se
 
 This project started as input for our meetup content and a nice demo app (no more "Hello World!"). As we were designing the demo app, we acknowledged a common struggle: there is so much content for software people out there, how do we manage it all? Avoid "content overload" and still keep on learing? Meet Amped: "Your connection to curated content"
 
-### Content List and Schedule
+### Content List
 
 | Content                                                                                       | Description                         |
 | --------------------------------------------------------------------------------------------- | ----------------------------------- |
