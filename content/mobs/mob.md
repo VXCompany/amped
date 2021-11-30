@@ -8,12 +8,12 @@ This video is a recording of a mob programming session from November the 18th. D
 
 The video covers the entire session (55 minutes), but you can jump to the following parts directly:
 
-| Part                                                                        | Description                            |
-| --------------------------------------------------------------------------- | -------------------------------------- |
-| [Personas](https://www.youtube.com/watch?v=4K02FnVTBhg?start=30)            | The persona we use in this Mob session |
-| [Estimates](https://www.youtube.com/watch?v=4K02FnVTBhg?start=480)          | No bullshit estimates                  |
-| [Mob Session Start](https://www.youtube.com/watch?v=4K02FnVTBhg?start=1120) | Driver Albert, navigator Daan          |
-| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?start=1560)            | Driver Aris, navigator Albert          |
-| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?start=2170)            | Driver Daan, navigator Aris            |
-| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?start=2520)            | Driver Dimitri, navigator Daan         |
-| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?start=2940)            | Driver Albert, navigator Dimitri       |
+| Part                                                                    | Description                            |
+| ----------------------------------------------------------------------- | -------------------------------------- |
+| [Personas](https://www.youtube.com/watch?v=4K02FnVTBhg?t=30)            | The persona we use in this Mob session |
+| [Estimates](https://www.youtube.com/watch?v=4K02FnVTBhg?t=480)          | No bullshit estimates                  |
+| [Mob Session Start](https://www.youtube.com/watch?v=4K02FnVTBhg?t=1120) | Driver Albert, navigator Daan          |
+| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?t=1560)            | Driver Aris, navigator Albert          |
+| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?t=2170)            | Driver Daan, navigator Aris            |
+| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?t=2520)            | Driver Dimitri, navigator Daan         |
+| [Rotate](https://www.youtube.com/watch?v=4K02FnVTBhg?t=2940)            | Driver Albert, navigator Dimitri       |
