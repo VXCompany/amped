@@ -8,7 +8,6 @@ namespace Amped.API
         public bool Read { get; private set; }
         public object Owner { get; }
         
-
         public Bookmark(Uri uri, string owner, bool read = false)
         {
             Uri = uri ?? throw new ArgumentNullException();
