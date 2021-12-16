@@ -14,7 +14,7 @@ namespace Amped.API.Controllers
         {
             _bookmarkRepository = bookmarkRepository;
         }
-
+        [Route("create")]
         [HttpPost]
         public IActionResult Create(CreateBookmarkRequest createBookmarkRequest)
         {

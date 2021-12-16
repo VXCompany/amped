@@ -43,16 +43,15 @@ namespace Amped.API.Tests.IntegrationTests
 
             var request = new CreateBookmarkRequest
             {
-                Uri = new Uri("www.totallyamped.tech/getting-started")
+                Uri = new Uri("https://app.totallyamped.tech/getting-started")
 
             };
 
             var serialized = JsonConvert.SerializeObject(request);
 
-            var result = await testFixture.Client.PostAsync(@"/bookmarks", new StringContent(serialized));
+            var result = await testFixture.Client.PostAsync(@"/api/bookmark/create", new StringContent(serialized));
 
             result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
-
     }
 }
