@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Amped.API.Tests
+namespace Amped.API
 {
     public class Bookmark
     {
         public Uri Uri { get; }
         public bool Read { get; }
         public object Owner { get; }
-
+        
         public Bookmark(Uri uri, string owner, bool read = false)
         {
             Uri = uri ?? throw new ArgumentNullException();
