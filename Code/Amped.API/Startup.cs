@@ -11,7 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Amped.API.Controllers;
+using Amped.API.Core;
+using Amped.API.Infrastructure;
 
 namespace Amped.API
 {

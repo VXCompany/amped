@@ -1,3 +1,4 @@
+using Amped.API.Core;
 using System;
 
 namespace Amped.API.Tests
