@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using Amped.API.Controllers;
+using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace Amped.API.Tests.IntegrationTests
@@ -19,6 +23,8 @@ namespace Amped.API.Tests.IntegrationTests
         {
             _client.Dispose();
         }
+
+        public HttpClient Client => _client;
     } 
     
     public class IntegrationTests
@@ -31,9 +37,21 @@ namespace Amped.API.Tests.IntegrationTests
         }
 
         [Fact]
-        public void Can_create_a_bookmark()
+        public async Task  Can_create_a_bookmark()
         {
-            // To do...
+            var testFixture = new TestFixture();
+
+            var request = new CreateBookmarkRequest
+            {
+                Uri = new Uri("www.totallyamped.tech/getting-started")
+
+            };
+
+            var serialized = JsonConvert.SerializeObject(request);
+
+            var result = await testFixture.Client.PostAsync(@"/bookmarks", new StringContent(serialized));
+
+            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
 
     }

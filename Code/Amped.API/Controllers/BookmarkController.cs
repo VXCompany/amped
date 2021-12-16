@@ -18,7 +18,7 @@ namespace Amped.API.Controllers
         [HttpPost]
         public IActionResult Create(CreateBookmarkRequest createBookmarkRequest)
         {
-            var bookmark = new Bookmark(createBookmarkRequest.Uri, createBookmarkRequest.Owner, createBookmarkRequest.IsRead);
+            var bookmark = new Bookmark(createBookmarkRequest.Uri, "Fred");
 
             _bookmarkRepository.Add(bookmark);
 
@@ -29,7 +29,5 @@ namespace Amped.API.Controllers
     public class CreateBookmarkRequest
     {
         public Uri Uri { get; set; }
-        public string Owner { get; set; }
-        public bool IsRead { get; set; }
     }
 }
