@@ -9,15 +9,8 @@ using Xunit;
 
 namespace Amped.API.Tests.IntegrationTests
 {
-    public class IntegrationTests
+    public class BookmarkTests
     {
-        private readonly TestFixture _fixture;
-
-        public IntegrationTests()
-        {
-            _fixture = new TestFixture();
-        }
-
         [Fact]
         public async Task Can_create_a_bookmark()
         {
