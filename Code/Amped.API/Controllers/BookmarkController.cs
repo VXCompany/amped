@@ -23,5 +23,11 @@ namespace Amped.API.Controllers
 
             return Ok();
         }
+
+        [HttpPost("markAsRead")]
+        public IActionResult MarkAsRead(MarkAsReadRequest markAsReadRequest)
+        {
+            return Ok();
+        }
     }
 }
