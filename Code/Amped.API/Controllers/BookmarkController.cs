@@ -1,5 +1,4 @@
 ﻿using Amped.API.Core;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amped.API.Controllers

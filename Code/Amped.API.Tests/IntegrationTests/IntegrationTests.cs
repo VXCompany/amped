@@ -1,33 +1,14 @@
-﻿using System;
+﻿using Amped.API.Controllers;
+using FluentAssertions;
+using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Amped.API.Controllers;
-using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Newtonsoft.Json;
 using Xunit;
 
 namespace Amped.API.Tests.IntegrationTests
 {
-    public class TestFixture : IDisposable
-    {
-        private readonly HttpClient _client;
-        
-        public TestFixture()
-        {
-            var factory = new WebApplicationFactory<Startup>();
-            _client = factory.CreateClient();
-        }
-        
-        public void Dispose()
-        {
-            _client.Dispose();
-        }
-
-        public HttpClient Client => _client;
-    } 
-    
     public class IntegrationTests
     {
         private readonly TestFixture _fixture;
@@ -38,7 +19,7 @@ namespace Amped.API.Tests.IntegrationTests
         }
 
         [Fact]
-        public async Task  Can_create_a_bookmark()
+        public async Task Can_create_a_bookmark()
         {
             var testFixture = new TestFixture();
 
