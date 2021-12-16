@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Amped.API.Controllers;
 using FluentAssertions;
@@ -49,7 +50,7 @@ namespace Amped.API.Tests.IntegrationTests
 
             var serialized = JsonConvert.SerializeObject(request);
 
-            var result = await testFixture.Client.PostAsync(@"/api/bookmark/create", new StringContent(serialized));
+            var result = await testFixture.Client.PostAsync(@"/api/bookmark/create", new StringContent(serialized, Encoding.UTF8, "application/json"));
 
             result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
