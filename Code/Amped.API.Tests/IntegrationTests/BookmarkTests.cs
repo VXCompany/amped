@@ -1,10 +1,7 @@
 ﻿using Amped.API.Controllers;
 using FluentAssertions;
-using Newtonsoft.Json;
 using System;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -22,12 +19,9 @@ namespace Amped.API.Tests.IntegrationTests
                 Uri = new Uri("https://app.totallyamped.tech/getting-started")
             };
 
-            var serialized = JsonConvert.SerializeObject(request);
+            var result = await _testFixture.Client.PostAsync(@"/api/bookmark/create", request.ToStringContent());
 
-            var content = new StringContent(serialized, Encoding.UTF8, "application/json");
-            var result = await _testFixture.Client.PostAsync(@"/api/bookmark/create", content);
-
-            result.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
         [Fact]
@@ -38,10 +32,7 @@ namespace Amped.API.Tests.IntegrationTests
                 Id = 42
             };
 
-            var serialized = JsonConvert.SerializeObject(request);
-            var content = new StringContent(serialized, Encoding.UTF8, "application/json");
-
-            var result = await _testFixture.Client.PostAsync(@"/api/bookmark/markAsRead", content);
+            var result = await _testFixture.Client.PostAsync(@"/api/bookmark/markAsRead", request.ToStringContent());
 
             result.StatusCode.Should().Be(HttpStatusCode.OK);
         }
