@@ -53,5 +53,17 @@ namespace Amped.API.Tests
 
             bookmark.Owner.Should().Be(parker);
         }
+
+        [Fact]
+        public void Should_Be_Marked_Read()
+        {
+            var bookmark = new BookmarkBuilder()
+                .WithRead(false)
+                .Build();
+
+            bookmark.MarkRead();
+
+            bookmark.Read.Should().BeTrue();
+        }
     }
 }
