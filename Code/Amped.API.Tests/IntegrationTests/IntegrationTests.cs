@@ -23,22 +23,17 @@ namespace Amped.API.Tests.IntegrationTests
     
     public class IntegrationTests
     {
-        public IntegrationTests(TestFixture fixture)
+        private readonly TestFixture _fixture;
+
+        public IntegrationTests()
         {
-            
+            _fixture = new TestFixture();
         }
 
         [Fact]
         public void Can_create_a_bookmark()
         {
-            // Arrange
-            var client = _factory.CreateClient();
-
-            // Act
-            var response = await client.PostAsync(url);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
+            // To do...
         }
 
     }
