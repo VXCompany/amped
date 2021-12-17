@@ -351,3 +351,4 @@ MigrationBackup/
 
 # General
 .DS_Store
+.idea
