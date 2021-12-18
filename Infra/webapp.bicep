@@ -50,7 +50,7 @@ module sitesettings 'appsettings.bicep' = {
   name: '${site.name}-appsettings'
   params: {
     siteName: site.name
-    currentAppSettings: list('${site.id}/config/appsettings', '2020-12-01').properties
+    currentAppSettings: list('${site.id}/config/appsettings', '2021-02-01').properties
     appSettings: {
       'ASPNETCORE_ENVIRONMENT': 'Production'
       'ASPNETCORE_HTTPS_PORT': '443'
