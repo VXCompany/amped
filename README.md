@@ -1,4 +1,5 @@
 [![CI](https://github.com/VXCompany/amped/actions/workflows/main.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/main.yml)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=VXCompany_amped)
 # Welcome to Amped!
 
 ## Meet Amped: "Your connection to curated content"
