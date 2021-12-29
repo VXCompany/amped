@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
       - name: Bicep Build
         uses: Azure/bicep-build-action@v1.0.0
         with:
