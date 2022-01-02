@@ -15,14 +15,14 @@ stages:
   - job: Build
     steps:
     - task: DotNetCoreCLI@2
-      displayName: 'Restore'
+      displayName: 'Restore API'
       inputs:
         command: 'restore'
         projects: '**/*.csproj'
         workingDirectory: './Code'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Test'
+      displayName: 'Test API'
       inputs:
         command: 'test'
         projects: '**/*.csproj'
@@ -30,7 +30,7 @@ stages:
         workingDirectory: './Code'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Build'
+      displayName: 'Build API'
       inputs:
         command: 'build'
         projects: '**/*.csproj'
@@ -48,11 +48,13 @@ stages:
           steps:
           - checkout: self
           - task: DotNetCoreCLI@2
+            displayName: 'Publish API'
             inputs:
               command: 'publish'
               publishWebProjects: true
               workingDirectory: './Code'
           - task: AzureWebApp@1
+            displayName: 'Deploy API'
             inputs:
               azureSubscription: 'Azure MPN - yuriburger'
               appType: 'webAppLinux'
