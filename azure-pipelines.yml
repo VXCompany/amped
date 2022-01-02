@@ -34,7 +34,7 @@ stages:
         PathtoPublish: '$(Build.SourcesDirectory)/Infra/main.json'
         ArtifactName: 'infra'
         publishLocation: 'Container'
-- stage: Deploy Test
+- stage: 'Deploy Test'
   jobs:
   - deployment: biceptoAzure
     displayName: 'Deploy bicep to Azure'
