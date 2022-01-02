@@ -4,16 +4,21 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+ branches:
+   include:
+     - main
+ paths:
+   include:
+   - Infra/*
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Azure MPN - yuriburger'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az bicep build --file main.bicep'
+    workingDirectory: 'Infra'
