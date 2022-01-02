@@ -39,15 +39,14 @@ stages:
         deploy:
           steps:
           - checkout: self
-          - task: AzureResourceManagerTemplateDeployment@3
+          - task: AzureCLI@2
+            displayName: 'Deploy bicep template'
             inputs:
-              deploymentScope: 'Resource Group'
-              azureResourceManagerConnection: 'Azure MPN - yuriburger'
-              subscriptionId: '39740059-f78d-4d22-8dd6-8f2dffb4a915'
-              action: 'Create Or Update Resource Group'
-              resourceGroupName: 'totallyamped.tech'
-              location: 'West Europe'
-              templateLocation: 'Linked artifact'
-              csmFile: '$(Agent.BuildDirectory)/infra/main.json'
-              deploymentMode: 'Incremental'
-              deploymentName: 'infra'
+              azureSubscription: 'Azure MPN - yuriburger' 
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az deployment group create  `
+                --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
+                --resource-group 'totallyamped.tech' `
+                --parameters env=qa
