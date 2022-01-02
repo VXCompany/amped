@@ -27,6 +27,6 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish infra'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/main.json'
+    PathtoPublish: '$(Build.SourcesDirectory)/Infra/main.json'
     ArtifactName: 'infra'
     publishLocation: 'Container'
