@@ -48,6 +48,6 @@ stages:
               resourceGroupName: 'totallyamped.tech'
               location: 'West Europe'
               templateLocation: 'Linked artifact'
-              csmFile: 'main.json'
+              csmFile: '$(Agent.BuildDirectory)/inmain.json'
               deploymentMode: 'Incremental'
               deploymentName: 'infra'
