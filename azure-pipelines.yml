@@ -29,3 +29,24 @@ stages:
         PathtoPublish: '$(Build.SourcesDirectory)/Infra/main.json'
         ArtifactName: 'infra'
         publishLocation: 'Container'
+- stage: DeployTest
+  jobs:
+  - deployment: biceptoAzure
+    displayName: 'Deploy bicep to Azure'
+    environment: 'AzureTest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: AzureCLI@2
+            displayName: 'Deploy bicep template'
+            inputs:
+              azureSubscription: 'Azure MPN - yuriburger' 
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az deployment group create  `
+                --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
+                --resource-group 'totallyamped.tech' `
+                --parameters env=qa 
