@@ -31,8 +31,8 @@ stages:
         publishLocation: 'Container'
 - stage: DeployTest
   jobs:
-  - deployment: biceptoAzure
-    displayName: 'Deploy bicep to Azure'
+  - deployment: InfratoAzure
+    displayName: 'Deploy to Azure'
     environment: 'AzureTest'
     strategy:
       runOnce:
