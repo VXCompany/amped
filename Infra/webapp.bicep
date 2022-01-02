@@ -19,7 +19,7 @@ resource appPlan 'Microsoft.Web/serverfarms@2021-02-01' = {
   name: appServicePlanName
   location: location
   sku: {
-    name: 'F1'
+    name: 'B1'
   }
   kind: 'linux'
   properties: {
