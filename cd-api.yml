@@ -37,5 +37,24 @@ stages:
         arguments: '--configuration Release --no-restore'
         workingDirectory: './Code'
 
-
+- stage: DeployTest
+  jobs:
+  - deployment: APItoAzure
+    displayName: 'Deploy to Azure'
+    environment: 'AzureTest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              workingDirectory: './Code'
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: 'Azure MPN - yuriburger'
+              appType: 'webAppLinux'
+              appName: 'app-amped-api-qa-westeu-001'
+              package: '$(System.DefaultWorkingDirectory)/Code/**/*.zip'
 
