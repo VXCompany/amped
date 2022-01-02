@@ -1,6 +1,6 @@
 # This is the workflow that will build and analyze the .NET source code
 
-name: CI - Code
+name: CI - API
 
 # Controls when the workflow will run
 on:
