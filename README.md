@@ -1,4 +1,5 @@
 [![CI](https://github.com/VXCompany/amped/actions/workflows/main.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/main.yml)
+
 # Welcome to Amped!
 
 ## Meet Amped: "Your connection to curated content"
@@ -28,7 +29,7 @@ This project started as input for our meetup content and a nice demo app (no mor
 
 ### Open Source
 
-This project is OSS, MIT licensed so you can pretty much do with it as you please. We will be running our own instance, targeted at people in the IT industry here: https://app.totallyamped.tech
+This project is OSS, MIT licensed so you can pretty much do with it as you please. We will be running our own instance, targeted at people in the IT industry here: https://app.totallyampednow.com
 
 ## Contributions
 
