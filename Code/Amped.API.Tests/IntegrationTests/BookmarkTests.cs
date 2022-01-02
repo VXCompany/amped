@@ -16,7 +16,7 @@ namespace Amped.API.Tests.IntegrationTests
         {
             var request = new CreateBookmarkRequest
             {
-                Uri = new Uri("https://app.totallyamped.tech/getting-started")
+                Uri = new Uri("https://app.totallyampednow.com/getting-started")
             };
 
             var result = await _testFixture.Client.PostAsync(@"/api/bookmark/create", request.ToStringContent());
