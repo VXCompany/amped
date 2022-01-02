@@ -14,19 +14,45 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: AzureCLI@2
-  displayName: 'Build infra'
-  inputs:
-    azureSubscription: 'Azure MPN - yuriburger'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az bicep build --file main.bicep'
-    workingDirectory: 'Infra'
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Build infra'
+      inputs:
+        azureSubscription: 'Azure MPN - yuriburger'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az bicep build --file main.bicep'
+        workingDirectory: 'Infra'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish infra'
-  inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/Infra/main.json'
-    ArtifactName: 'infra'
-    publishLocation: 'Container'
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish infra'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/Infra/main.json'
+        ArtifactName: 'infra'
+        publishLocation: 'Container'
+- stage: Deploy Test
+  jobs:
+  - deployment: biceptoAzure
+    displayName: 'Deploy bicep to Azure'
+    environment: 'AzureDeployment'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              deploymentScope: 'Resource Group'
+              azureResourceManagerConnection: 'Azure MPN - yuriburger'
+              subscriptionId: '39740059-f78d-4d22-8dd6-8f2dffb4a915'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: 'totallyamped.tech'
+              location: 'West Europe'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Build.SourcesDirectory)/Infra/main.json'
+              deploymentMode: 'Incremental'
+              deploymentName: 'infra'
