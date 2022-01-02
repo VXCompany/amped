@@ -16,9 +16,17 @@ pool:
 
 steps:
 - task: AzureCLI@2
+  displayName: 'Build infra'
   inputs:
     azureSubscription: 'Azure MPN - yuriburger'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az bicep build --file main.bicep'
     workingDirectory: 'Infra'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish infra'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/main.json'
+    ArtifactName: 'infra'
+    publishLocation: 'Container'
