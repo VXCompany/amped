@@ -13,14 +13,6 @@ pool:
 
 stages:
 
-- stage: RunVulnerabilityTest
-  jobs:
-    
-  - job: Test
-    container: owasp/zap2docker-bare:2.11.1
-    steps:
-    - script: printenv
-
 - stage: Build
   jobs:
   - job: Build
