@@ -12,6 +12,15 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
+
+- stage: RunVulnerabilityTest
+  jobs:
+    
+  - job: Test
+    container: owasp/zap2docker-stable
+    steps:
+    - script: printenv
+
 - stage: Build
   jobs:
   - job: Build
@@ -63,10 +72,3 @@ stages:
               appName: 'app-amped-api-qa-westeu-001'
               package: '$(System.DefaultWorkingDirectory)/Code/**/*.zip'
 
-- stage: RunVulnerabilityTest
-  jobs:
-    
-  - job: Test
-    container: owasp/zap2docker-stable
-    steps:
-    - script: printenv
