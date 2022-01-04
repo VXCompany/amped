@@ -17,7 +17,7 @@ stages:
   jobs:
     
   - job: Test
-    container: owasp/zap2docker-stable:2.11.1
+    container: owasp/zap2docker-bare:2.11.1
     steps:
     - script: printenv
 
