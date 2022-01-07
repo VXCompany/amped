@@ -1,0 +1,87 @@
+---
+env:
+  contexts:
+  - name: "https://api.totallyampednow.com"
+    urls:
+    - "https://api.totallyampednow.com"
+    includePaths:
+    - "https://api.totallyampednow.com.*"
+    excludePaths: []
+    authentication:
+      parameters: {}
+      verification:
+        method: "response"
+        pollFrequency: 60
+        pollUnits: "requests"
+        pollUrl: ""
+        pollPostData: ""
+    sessionManagement:
+      method: "cookie"
+      parameters: {}
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+  vars: {}
+jobs:
+- parameters:
+    updateAddOns: false
+  install: []
+  uninstall: []
+  name: "addOns"
+  type: "addOns"
+- parameters:
+    scanOnlyInScope: true
+    enableTags: false
+  rules: []
+  name: "passiveScan-config"
+  type: "passiveScan-config"
+- parameters: {}
+  name: "openapi"
+  type: "openapi"
+- parameters: {}
+  name: "passiveScan-wait"
+  type: "passiveScan-wait"
+- parameters: {}
+  policyDefinition:
+    rules: []
+  name: "activeScan"
+  type: "activeScan"
+- parameters:
+    template: "risk-confidence-html"
+    theme: "original"
+    reportDir: "/__w/1/s/zap-report"
+    reportFile: ""
+    reportTitle: "ZAP Scanning Report"
+    reportDescription: ""
+    displayReport: false
+  risks:
+  - "info"
+  - "low"
+  - "medium"
+  - "high"
+  confidences:
+  - "falsepositive"
+  - "low"
+  - "medium"
+  - "high"
+  - "confirmed"
+  sections:
+  - "siteRiskCounts"
+  - "responseBody"
+  - "appendix"
+  - "alertTypes"
+  - "responseHeader"
+  - "alertTypeCounts"
+  - "riskConfidenceCounts"
+  - "alerts"
+  - "aboutThisReport"
+  - "contents"
+  - "requestBody"
+  - "reportDescription"
+  - "reportParameters"
+  - "requestHeader"
+  - "summaries"
+  name: "report"
+  type: "report"
+
