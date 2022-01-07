@@ -85,4 +85,10 @@ stages:
         targetPath: '$(Pipeline.Workspace)/s/zap-report'
         artifact: 'zap-report'
         publishLocation: 'pipeline'
+  - job: Load
+    displayName: 'Loadtest (Azure)'
+    steps:
+    - script: |
+          echo 'placeholder'
+
 
