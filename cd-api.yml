@@ -47,7 +47,7 @@ stages:
 
 - stage: DeployTest
   jobs:
-  - deployment: APItoAzure
+  - deployment: APIToAzure
     displayName: 'Deploy to Azure'
     environment: 'AzureTest'
     strategy:
