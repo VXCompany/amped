@@ -33,7 +33,7 @@ stages:
         publishLocation: 'Container'
 - stage: DeployTest
   jobs:
-  - deployment: InfratoAzure
+  - deployment: InfraToAzure
     displayName: 'Deploy to Azure'
     environment: 'AzureTest'
     strategy:
@@ -42,7 +42,7 @@ stages:
           steps:
           - checkout: self
           - task: AzureCLI@2
-            displayName: 'Deploy bicep template'
+            displayName: 'Deploy template'
             inputs:
               azureSubscription: 'Azure MPN - yuriburger' 
               scriptType: 'pscore'
