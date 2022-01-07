@@ -11,6 +11,11 @@ pr: none
 pool:
   vmImage: ubuntu-latest
 
+resources:
+  containers:
+  - container: zap
+    image: yuriburger/zap2docker-ado:2.11.1
+
 stages:
 
 - stage: Build
@@ -63,4 +68,19 @@ stages:
               appType: 'webAppLinux'
               appName: 'app-amped-api-qa-westeu-001'
               package: '$(System.DefaultWorkingDirectory)/Code/**/*.zip'
+
+- stage: VulnerabilityTest
+  jobs:
+  - job: ZAP
+    container: zap
+    steps:
+    - script: |
+          /zap/zap.sh -cmd -autorun $BUILD_SOURCESDIRECTORY/Test/api-zap-auto.yaml
+      displayName: 'Vulnerability Scan'
+
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/s/zap-report'
+        artifact: 'zap-report'
+        publishLocation: 'pipeline'
 
