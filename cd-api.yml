@@ -69,9 +69,10 @@ stages:
               appName: 'app-amped-api-qa-westeu-001'
               package: '$(System.DefaultWorkingDirectory)/Code/**/*.zip'
 
-- stage: VulnerabilityTest
+- stage: Test
   jobs:
   - job: ZAP
+    displayName: 'Vulnerability (ZAP)'
     container: zap
     steps:
     - script: |
@@ -79,6 +80,7 @@ stages:
       displayName: 'Vulnerability Scan'
 
     - task: PublishPipelineArtifact@1
+      displayName: 'Publish report'
       inputs:
         targetPath: '$(Pipeline.Workspace)/s/zap-report'
         artifact: 'zap-report'
