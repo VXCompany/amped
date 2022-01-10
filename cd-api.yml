@@ -76,7 +76,7 @@ stages:
     container: zap
     steps:
     - script: |
-          /zap/zap.sh -cmd -autorun $BUILD_SOURCESDIRECTORY/Test/api-zap-auto.yaml
+          /zap/zap.sh -cmd -autorun $BUILD_SOURCESDIRECTORY/Test/Vulnerability/api-zap-auto.yaml
       displayName: 'Vulnerability Scan'
 
     - task: PublishPipelineArtifact@1
