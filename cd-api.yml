@@ -14,7 +14,7 @@ pool:
 resources:
   containers:
   - container: zap
-    image: yuriburger/zap2docker-ado:2.11.1
+    image: vxcompanybv/zap2docker-ado:2.11.1
 
 stages:
 
