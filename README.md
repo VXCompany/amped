@@ -6,7 +6,7 @@
 
 Amped's main goal is to help with access to curated content. Users are encouraged to contribute, consume and rate all kinds of content: (e)books, blogposts, links, videos, courses, etc.
 
-![The Amped icon](amped-icon-96.png)
+![The Amped icon](amped-icon-128.png)
 
 ### What does it do?
 
