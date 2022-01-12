@@ -10,22 +10,22 @@ The video covers the entire session (1 hour, 35 minutes), but you can jump to th
 
 | Part                                                     | Description                            |
 | -------------------------------------------------------- | -------------------------------------- |
-| [Rotate](https://youtu.be/0qnNhFEDoHI?t=30)             | Driver Albert, navigator Patrick |
-| [Rider](https://youtu.be/0qnNhFEDoHI?t=117)            | The Best IDE ever |
-| [Rotate](https://youtu.be/0qnNhFEDoHI?t=600)            | Driver Dimitri, navigator Albert |
-| [TDD](https://youtu.be/0qnNhFEDoHI?t=615)            | But first... we create the test! |
-| [API Design](https://youtu.be/0qnNhFEDoHI?t=900)            | RESTful or gRPC style API |
-| [Rotate](https://youtu.be/0qnNhFEDoHI?t=1200)           | Driver Daan, navigator Dimitri |
-| [Test](https://youtu.be/0qnNhFEDoHI?t=1260)           | Unit Test vs Integration Test |
-| [Test](https://youtu.be/0qnNhFEDoHI?t=1560)           | ASP.NET Integration Test |
-| [Rotate](https://youtu.be/0qnNhFEDoHI?t=2280)           | Driver Patrick, navigator Daan |
-| [Rotate](https://youtu.be/0qnNhFEDoHI?t=3060)           | Driver Yuri, navigator Patrick |
-| [Rotate](https://youtu.be/0qnNhFEDoHI?t=3600)           | Driver Albert, navigator Yuri |
-| [Service Scope](https://youtu.be/0qnNhFEDoHI?t=3780)           | Service Scope |
-| [Test](https://youtu.be/0qnNhFEDoHI?t=4260)           | A working Test |
-| [Rotate](https://youtu.be/0qnNhFEDoHI?t=4320)           | Driver Dimitri, navigator Albert |
-| [Architecture](https://youtu.be/0qnNhFEDoHI?t=4500)           | Clean Architecture, Screaming Architecture |
-| [Design](https://youtu.be/0qnNhFEDoHI?t=5700)           | An Extension Method |
+| [Rotate](https://youtu.be/0qnNhFEDoHI?t=30)              | Driver Albert, navigator Patrick |
+| [Rider](https://youtu.be/0qnNhFEDoHI?t=97)               | The Best IDE ever |
+| [Rotate](https://youtu.be/0qnNhFEDoHI?t=600)             | Driver Dimitri, navigator Albert |
+| [TDD](https://youtu.be/0qnNhFEDoHI?t=615)                | But first... we create the test! |
+| [API Design](https://youtu.be/0qnNhFEDoHI?t=900)         | RESTful or gRPC style API |
+| [Rotate](https://youtu.be/0qnNhFEDoHI?t=1200)            | Driver Daan, navigator Dimitri |
+| [Test](https://youtu.be/0qnNhFEDoHI?t=1260)              | Unit Test vs Integration Test |
+| [Test](https://youtu.be/0qnNhFEDoHI?t=1560)              | ASP.NET Integration Test |
+| [Rotate](https://youtu.be/0qnNhFEDoHI?t=2280)            | Driver Patrick, navigator Daan |
+| [Rotate](https://youtu.be/0qnNhFEDoHI?t=3060)            | Driver Yuri, navigator Patrick |
+| [Rotate](https://youtu.be/0qnNhFEDoHI?t=3600)            | Driver Albert, navigator Yuri |
+| [Service Scope](https://youtu.be/0qnNhFEDoHI?t=3780)     | Service Scope |
+| [Test](https://youtu.be/0qnNhFEDoHI?t=4260)              | A working Test |
+| [Rotate](https://youtu.be/0qnNhFEDoHI?t=4320)            | Driver Dimitri, navigator Albert |
+| [Architecture](https://youtu.be/0qnNhFEDoHI?t=4500)      | Clean Architecture, Screaming Architecture |
+| [Design](https://youtu.be/0qnNhFEDoHI?t=5700)            | An Extension Method |
 
 
 
