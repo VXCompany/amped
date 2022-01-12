@@ -18,14 +18,14 @@ This project started as input for our meetup content and a nice demo app (no mor
 
 ### Content List
 
-| Content                                                                                       | Description                         |
-| --------------------------------------------------------------------------------------------- | ----------------------------------- |
-| [Building the next 'killer' app](https://vxcompany.com/insight/building-the-next-killer-app/) | Introduction blogpost               |
-| [The Amped personas ](./content/personas/personas.md)                                         | The 5 personas we created for Amped |
-| [CI/CD Design ](./content/designs/1_cicd/cicd.md)                                             | A first proposal on CI/CD for Amped |
-| [IaC Design ](./content/designs/2_infra_as_code/infra_as_code.md)                             | A first proposal on IaC for Amped   |
-| [Mob programming session](./content/mobs/mob.md)                                              | Modelling the domain                |
-| [Mob programming session #2](./content/mobs/mob2.md)                                          | Cleaning up                         |
+| Content                                                                                       | Description                           |
+| --------------------------------------------------------------------------------------------- | ------------------------------------- |
+| [Building the next 'killer' app](https://vxcompany.com/insight/building-the-next-killer-app/) | Introduction blogpost                 |
+| [The Amped personas ](./content/personas/personas.md)                                         | The 5 personas we created for Amped   |
+| [CI/CD Design ](./content/designs/1_cicd/cicd.md)                                             | A first proposal on CI/CD for Amped   |
+| [IaC Design ](./content/designs/2_infra_as_code/infra_as_code.md)                             | A first proposal on IaC for Amped     |
+| [Mob programming session](./content/mobs/mob.md)                                              | Modelling the domain                  |
+| [Mob programming session #2](./content/mobs/mob2.md)                                          | Clean up, more tests and architecture |
 
 ### Open Source
 
