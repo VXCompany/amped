@@ -1,4 +1,4 @@
-# Mob programming session: The next User Story
+# Mob programming session: Clean up, more tests and architecture
 
 > Mob programming is a software development approach where the whole team works on the same thing, at the same time, in the same space, and at the same computer. This is similar to pair programming where two people sit at the same computer and collaborate on the same code at the same time. With mob programming, the collaboration is extended to everyone on the team, while still using a single computer for writing the code and inputting it into the code base. - Wikipedia
 
