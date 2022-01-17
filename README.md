@@ -1,4 +1,4 @@
-[![CI](https://github.com/VXCompany/amped/actions/workflows/main.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/main.yml)
+[![CI](https://github.com/VXCompany/amped/actions/workflows/ci-api.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/ci-api.yml)
 
 # Welcome to Amped!
 
