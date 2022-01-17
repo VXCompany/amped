@@ -1,0 +1,94 @@
+trigger:
+ branches:
+   include:
+     - main
+ paths:
+   include:
+   - Code/*
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  containers:
+  - container: zap
+    image: vxcompanybv/zap2docker-ado:2.11.1
+
+stages:
+
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore API'
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        workingDirectory: './Code'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Test API'
+      inputs:
+        command: 'test'
+        projects: '**/*.csproj'
+        arguments: '--no-restore --verbosity normal'
+        workingDirectory: './Code'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build API'
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration Release --no-restore'
+        workingDirectory: './Code'
+
+- stage: DeployTest
+  jobs:
+  - deployment: APIToAzure
+    displayName: 'Deploy to Azure'
+    environment: 'AzureTest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: DotNetCoreCLI@2
+            displayName: 'Publish API'
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              workingDirectory: './Code'
+          - task: AzureWebApp@1
+            displayName: 'Deploy API'
+            inputs:
+              azureSubscription: 'Azure MPN - yuriburger'
+              appType: 'webAppLinux'
+              appName: 'app-amped-api-qa-westeu-001'
+              package: '$(System.DefaultWorkingDirectory)/Code/**/*.zip'
+
+- stage: Test
+  jobs:
+  - job: ZAP
+    displayName: 'Vulnerability (ZAP)'
+    container: zap
+    steps:
+    - script: |
+          /zap/zap.sh -cmd -autorun $BUILD_SOURCESDIRECTORY/Test/Vulnerability/api-zap-auto.yaml
+      displayName: 'Vulnerability Scan'
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish report'
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/s/zap-report'
+        artifact: 'zap-report'
+        publishLocation: 'pipeline'
+  - job: Load
+    displayName: 'Loadtest (Azure)'
+    steps:
+    - script: |
+          echo 'placeholder'
+
+

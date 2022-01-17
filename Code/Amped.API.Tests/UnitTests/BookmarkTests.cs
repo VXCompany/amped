@@ -1,8 +1,8 @@
-using System;
 using FluentAssertions;
+using System;
 using Xunit;
 
-namespace Amped.API.Tests
+namespace Amped.API.Tests.UnitTests
 {
     public class BookmarkTests
     {
@@ -10,23 +10,23 @@ namespace Amped.API.Tests
         public void Should_Throw_ArgumentNullException_When_No_Uri()
         {
             Uri? invalidUri = null;
-            
+
             Action bookmark = () => new BookmarkBuilder()
                 .WithUri(invalidUri)
                 .Build();
 
             bookmark.Should().Throw<ArgumentNullException>();
         }
-        
+
         [Fact]
         public void Should_Set_Uri()
         {
             var expected = new Uri("http://someuri.com");
-            
+
             var bookmark = new BookmarkBuilder()
                 .WithUri(expected)
                 .Build();
-            
+
             bookmark.Uri.Should().Be(expected);
         }
 
@@ -38,7 +38,7 @@ namespace Amped.API.Tests
             var bookmark = new BookmarkBuilder()
                 .WithRead(read)
                 .Build();
-            
+
             bookmark.Read.Should().Be(true);
         }
 

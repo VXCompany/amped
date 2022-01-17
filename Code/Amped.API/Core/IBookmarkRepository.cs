@@ -1,4 +1,4 @@
-﻿namespace Amped.API.Controllers
+﻿namespace Amped.API.Core
 {
     public interface IBookmarkRepository
     {
