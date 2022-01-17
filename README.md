@@ -33,4 +33,8 @@ This project is OSS, MIT licensed so you can pretty much do with it as you pleas
 
 ## Contributions
 
-We hope to build a community and welcome contributions. A guide is coming soon.
+We hope to build a community and welcome contributions. 
+
+If you are looking to help to with a code contribution our project currently uses .NET / C#, but might expand to other languages, tools and frameworks in the future. 
+
+If you are interested in making a code contribution check out our [guidelines](contribute.md).
