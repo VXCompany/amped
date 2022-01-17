@@ -1,7 +1,7 @@
-﻿using Amped.API.Core;
 using Microsoft.AspNetCore.Mvc;
+using Amped.API.Core;
 
-namespace Amped.API.Controllers
+ namespace Amped.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,16 +14,17 @@ namespace Amped.API.Controllers
             _bookmarkRepository = bookmarkRepository;
         }
 
-        [HttpPost("create")]
+        [Route("create")]
+        [HttpPost]
         public IActionResult Create(CreateBookmarkRequest createBookmarkRequest)
         {
-            var bookmark = new Bookmark(createBookmarkRequest.Uri, "Fred");
+            var bookmark = Bookmark.CreateUnreadBookmark(createBookmarkRequest.Uri, "Fred");
 
             _bookmarkRepository.Add(bookmark);
 
             return Ok();
         }
-
+        
         [HttpPost("markAsRead")]
         public IActionResult MarkAsRead(MarkAsReadRequest markAsReadRequest)
         {

@@ -8,7 +8,9 @@ namespace Amped.API.Core
         public bool Read { get; private set; }
         public object Owner { get; }
 
-        public Bookmark(Uri uri, string owner, bool read = false)
+        public static Bookmark CreateUnreadBookmark(Uri uri, string owner) => new(uri, owner, false); 
+        
+        internal Bookmark(Uri uri, string owner, bool read)
         {
             Uri = uri ?? throw new ArgumentNullException();
             Owner = owner;
