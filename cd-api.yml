@@ -94,7 +94,7 @@ stages:
       displayName: 'Load Test'
       inputs:
         azureSubscription: 'Azure MPN - yuriburger'
-        loadTestConfigFile: './Test/Load/api-load.jmx'
+        loadTestConfigFile: './Test/Load/api-load.yaml'
         resourceGroup: 'totallyamped.tech'
         loadTestResource: 'lt-amped-qa-westeu-001'
 
