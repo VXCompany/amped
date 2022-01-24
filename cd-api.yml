@@ -87,8 +87,16 @@ stages:
         publishLocation: 'pipeline'
   - job: Load
     displayName: 'Loadtest (Azure)'
+    dependsOn: ZAP
+    condition: succeededOrFailed()
     steps:
-    - script: |
-          echo 'placeholder'
+    - task: AzureLoadTest@1
+      displayName: 'Load Test'
+      inputs:
+        azureSubscription: 'Azure MPN - yuriburger'
+        loadTestConfigFile: './Test/Load/api-load.jmx'
+        resourceGroup: 'totallyamped.tech'
+        loadTestResource: 'lt-amped-qa-westeu-001'
+
 
 
