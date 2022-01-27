@@ -27,6 +27,11 @@ This project started as input for our meetup content and a nice demo app (no mor
 | [Mob programming session](./content/mobs/mob.md)                                              | Modelling the domain                  |
 | [Mob programming session #2](./content/mobs/mob2.md)                                          | Clean up, more tests and architecture |
 
+
+We also do live broadcasts on Twitch. You can check our schedule there:
+
+[![The Twitch logo](./twitch.png)](https://www.twitch.tv/totallyamped)
+
 ### Open Source
 
 This project is OSS, MIT licensed so you can pretty much do with it as you please. We will be running our own instance, targeted at people in the IT industry here: https://app.totallyampednow.com
