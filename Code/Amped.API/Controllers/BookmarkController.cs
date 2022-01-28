@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Amped.Core;
+using Amped.Core.NewBookmark;
 
 namespace Amped.API.Controllers
 {
@@ -19,13 +19,10 @@ namespace Amped.API.Controllers
         
         [Route("create")]
         [HttpPost]
-        public IActionResult Create([FromServices] INewBookmarkUseCase useCase, CreateBookmarkRequest createBookmarkRequest)
+        public async Task<IActionResult> Create([FromServices] IBus bus, CreateBookmarkCommand command)
         {
-            var bookmark = Bookmark.CreateUnreadBookmark(createBookmarkRequest.Uri, "Fred");
-
-            useCase.CreateBookmark(bookmark);
-
-            return Ok();
+            await bus.Send(command);
+            return Accepted();
         }
         
         [HttpPost("markAsRead")]

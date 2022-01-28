@@ -1,10 +1,12 @@
 using Amped.Core;
+using Amped.Core.NewBookmark;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MassTransit;
 
 namespace Amped.API
 {
@@ -21,14 +23,32 @@ namespace Amped.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IBookmarkRepository, BookmarkRepository>();
+            services.AddTransient<IBus, Bus>();
             services.AddTransient<Queries.IBookmarkRepository, Queries.BookmarkRepository>(); // yuck...
-            services.AddTransient<INewBookmarkUseCase, NewBookmarkUseCase>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Amped.API", Version = "v1" });
             });
+            
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<CreateBookmarkCommandHandler>();
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host("localhost", "/", h =>
+                    {
+                        h.Username("user");
+                        h.Password("PASSWORD");
+                    });
+                    
+                    cfg.ConfigureEndpoints(context);
+                });
+            });
+
+            services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

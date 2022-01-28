@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Amped.API.Controllers;
-using Amped.Core;
+using Amped.Core.NewBookmark;
 using NSubstitute;
 using Xunit;
 
@@ -10,22 +10,23 @@ namespace Amped.API.Tests.UnitTests
     public class BookmarkControllerTests
     {
         [Fact]
-        public async Task Uses_NewBookmarkUseCase_To_Process_CreateRequest()
+        public async Task Sends_CreateBookmarkRequest_To_Bus()
         {
             // Arrange
-            var request = new CreateBookmarkRequest
+            var request = new CreateBookmarkCommand
             {
                 Uri = new Uri("https://app.totallyampednow.com")
             };
 
-            var useCase = Substitute.For<INewBookmarkUseCase>();
+            var bus = Substitute.For<IBus>();
+            
             var sut = new BookmarkController();
             
             // Act
-            sut.Create(useCase, request);
+            await sut.Create(bus, request);
 
             // Assert
-            await useCase.Received(1).CreateBookmark(Arg.Any<Bookmark>());
+            await bus.Received(1).Send(Arg.Is(request));
         }
         
         [Fact]

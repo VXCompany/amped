@@ -1,9 +1,9 @@
-﻿using Amped.API.Controllers;
-using FluentAssertions;
+﻿using FluentAssertions;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Amped.Core.NewBookmark;
 using Xunit;
 
 namespace Amped.API.Tests.IntegrationTests
@@ -25,14 +25,14 @@ namespace Amped.API.Tests.IntegrationTests
         [Fact]
         public async Task Can_create_a_bookmark()
         {
-            var request = new CreateBookmarkRequest
+            var request = new CreateBookmarkCommand
             {
                 Uri = new Uri("https://app.totallyampednow.com/getting-started")
             };
 
             var result = await _api.PostAsync(@"/api/bookmark/create", request.ToStringContent());
 
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            result.StatusCode.Should().Be(HttpStatusCode.Accepted);
         }
 
         [Fact]

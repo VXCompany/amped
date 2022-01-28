@@ -1,51 +1,49 @@
 using System;
 using System.Threading.Tasks;
+using Amped.Core.NewBookmark;
 using FluentAssertions;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using Xunit;
 
 namespace Amped.Core.Tests.UnitTests
 {
     public class NewBookmarkUseCaseTests
     {
-        private IBookmarkRepository repository;
+        private readonly IBookmarkRepository _repository;
         
         public NewBookmarkUseCaseTests()
         {
-            repository = Substitute.For<IBookmarkRepository>();
+            _repository = Substitute.For<IBookmarkRepository>();
         }
         
         [Fact]
         public async Task Can_Add_New_Bookmark_To_Datasource()
         {
             // arrange
-            var bookmark = new Bookmark(new Uri("https://totallyamped.com"), "albert", true);
-            var sut = new NewBookmarkUseCase(repository);
+            var payload = new CreateBookmarkCommand
+            {
+                Uri = new Uri("https://totallyamped.com")
+            };
+            
+            var sut = new CreateBookmarkCommandHandler(_repository);
 
             // act
-            await sut.CreateBookmark(bookmark);
+            var command = new TestConsumeContextBuilder<CreateBookmarkCommand>()
+                .WithValue(payload)
+                .Build();
+                
+            await sut.Consume(command);
             
             // assert
-            await repository.Received(1).Add(Arg.Is(bookmark));
+            await _repository.Received(1).Add(Arg.Is<Bookmark>(x => x.Uri == payload.Uri));
         }
         
         [Fact]
         public void Constructor_Requires_BookmarkRepository()
         {
-            Action actual = () => new NewBookmarkUseCase(null);
+            Action actual = () => new CreateBookmarkCommandHandler(null);
 
             actual.Should().Throw<ArgumentNullException>().WithParameterName("bookmarkRepository");
-        }
-
-        [Fact]
-        public async Task Throws_ArgumentNullException_When_Bookmark_Is_Null()
-        {
-            var sut = new NewBookmarkUseCase(repository);
-
-            await sut.CreateBookmark(null);
-            
-            repository.Add(Arg.Any<Bookmark>()).Throws<ArgumentException>();
         }
     }
 }
