@@ -1,4 +1,4 @@
-﻿namespace Amped.API.Core
+﻿namespace Amped.Core
 {
     public interface IBookmarkRepository
     {

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Amped.API.Core;
+using Amped.Core;
 
- namespace Amped.API.Controllers
+namespace Amped.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

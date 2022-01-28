@@ -1,5 +1,4 @@
-using Amped.API.Core;
-using Amped.API.Infrastructure;
+using Amped.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

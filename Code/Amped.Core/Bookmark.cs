@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Amped.API.Core
+namespace Amped.Core
 {
     public class Bookmark
     {

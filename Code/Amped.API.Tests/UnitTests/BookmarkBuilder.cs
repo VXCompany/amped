@@ -1,5 +1,5 @@
-using Amped.API.Core;
 using System;
+using Amped.Core;
 
 namespace Amped.API.Tests.UnitTests
 {

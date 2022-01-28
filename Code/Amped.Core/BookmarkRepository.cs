@@ -1,7 +1,6 @@
-using Amped.API.Core;
 using System.Collections.Generic;
 
-namespace Amped.API.Infrastructure
+namespace Amped.Core
 {
     public class BookmarkRepository : IBookmarkRepository
     {
