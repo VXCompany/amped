@@ -1,7 +1,6 @@
 using System;
-using Amped.Core;
 
-namespace Amped.API.Tests.UnitTests
+namespace Amped.Core.Tests.UnitTests
 {
     public class BookmarkBuilder
     {

@@ -1,8 +1,8 @@
-using FluentAssertions;
 using System;
+using FluentAssertions;
 using Xunit;
 
-namespace Amped.API.Tests.UnitTests
+namespace Amped.Core.Tests.UnitTests
 {
     public class BookmarkTests
     {
