@@ -2,6 +2,7 @@
 using FluentAssertions;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -9,7 +10,9 @@ namespace Amped.API.Tests.IntegrationTests
 {
     public class BookmarkTests
     {
-        private TestFixture _testFixture = new();
+        private readonly HttpClient _api = new ApiTestClientBuilder().Build();
+
+        ~BookmarkTests() => _api.Dispose();
 
         [Fact]
         public async Task Can_create_a_bookmark()
@@ -19,7 +22,7 @@ namespace Amped.API.Tests.IntegrationTests
                 Uri = new Uri("https://app.totallyampednow.com/getting-started")
             };
 
-            var result = await _testFixture.Client.PostAsync(@"/api/bookmark/create", request.ToStringContent());
+            var result = await _api.PostAsync(@"/api/bookmark/create", request.ToStringContent());
 
             result.StatusCode.Should().Be(HttpStatusCode.OK);
         }
@@ -32,7 +35,7 @@ namespace Amped.API.Tests.IntegrationTests
                 Id = 42
             };
 
-            var result = await _testFixture.Client.PostAsync(@"/api/bookmark/markAsRead", request.ToStringContent());
+            var result = await _api.PostAsync(@"/api/bookmark/markAsRead", request.ToStringContent());
 
             result.StatusCode.Should().Be(HttpStatusCode.OK);
         }
