@@ -21,6 +21,7 @@ namespace Amped.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IBookmarkRepository, BookmarkRepository>();
+            services.AddTransient<INewBookmarkUseCase, NewBookmarkUseCase>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Amped.Core
 {
@@ -6,9 +7,10 @@ namespace Amped.Core
     {
         private static readonly List<Bookmark> _bookmarks = new();
 
-        public void Add(Bookmark bookmark)
+        public Task Add(Bookmark bookmark)
         {
             _bookmarks.Add(bookmark);
+            return Task.CompletedTask;
         }
     }
 }

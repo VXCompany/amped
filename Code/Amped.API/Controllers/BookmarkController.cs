@@ -7,13 +7,6 @@ namespace Amped.API.Controllers
     [ApiController]
     public class BookmarkController : ControllerBase
     {
-        private readonly IBookmarkRepository _bookmarkRepository;
-
-        public BookmarkController(IBookmarkRepository bookmarkRepository)
-        {
-            _bookmarkRepository = bookmarkRepository;
-        }
-
         [Route("all")]
         [HttpGet]
         public IActionResult Get()
@@ -27,11 +20,11 @@ namespace Amped.API.Controllers
         
         [Route("create")]
         [HttpPost]
-        public IActionResult Create(CreateBookmarkRequest createBookmarkRequest)
+        public IActionResult Create([FromServices] INewBookmarkUseCase useCase, CreateBookmarkRequest createBookmarkRequest)
         {
             var bookmark = Bookmark.CreateUnreadBookmark(createBookmarkRequest.Uri, "Fred");
 
-            _bookmarkRepository.Add(bookmark);
+            useCase.CreateBookmark(bookmark);
 
             return Ok();
         }
