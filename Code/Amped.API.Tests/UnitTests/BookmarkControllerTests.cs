@@ -27,5 +27,19 @@ namespace Amped.API.Tests.UnitTests
             // Assert
             await useCase.Received(1).CreateBookmark(Arg.Any<Bookmark>());
         }
+        
+        [Fact]
+        public async Task Uses_BookmarkRepository_To_List_Bookmarks()
+        {
+            // Arrange
+            var repository = Substitute.For<Queries.IBookmarkRepository>();
+            var sut = new BookmarkController();
+            
+            // Act
+            await sut.Get(repository);
+
+            // Assert
+            await repository.Received(1).GetAll();
+        }
     }
 }

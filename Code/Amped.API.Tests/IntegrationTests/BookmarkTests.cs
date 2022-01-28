@@ -15,6 +15,14 @@ namespace Amped.API.Tests.IntegrationTests
         ~BookmarkTests() => _api.Dispose();
 
         [Fact]
+        public async Task Can_list_bookmarks()
+        {
+            var result = await _api.GetAsync(@"/api/bookmark/all");
+
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+        
+        [Fact]
         public async Task Can_create_a_bookmark()
         {
             var request = new CreateBookmarkRequest

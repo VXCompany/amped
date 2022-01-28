@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Amped.Core;
 
@@ -9,13 +10,11 @@ namespace Amped.API.Controllers
     {
         [Route("all")]
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromServices] Queries.IBookmarkRepository repository)
         {
-            return Ok(new []
-            {
-                (object) new { id = 1, uri = "https://test1.com/amped-is-the-bomb" },
-                new { id = 2, uri = "https://test2.com/why-amped-rulez", read = true }
-            });
+            var bookmarks = await repository.GetAll();
+            
+            return Ok(bookmarks);
         }        
         
         [Route("create")]

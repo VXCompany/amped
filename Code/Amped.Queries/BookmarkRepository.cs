@@ -4,7 +4,12 @@ using System.Threading.Tasks;
 
 namespace Amped.Queries
 {
-    public class BookmarkRepository
+    public interface IBookmarkRepository
+    {
+        Task<IEnumerable<Bookmark>> GetAll();
+    }
+
+    public class BookmarkRepository : IBookmarkRepository
     {
         public async Task<IEnumerable<Bookmark>> GetAll()
         {

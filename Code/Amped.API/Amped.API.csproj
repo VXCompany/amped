@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Amped.Core\Amped.Core.csproj" />
+    <ProjectReference Include="..\Amped.Queries\Amped.Queries.csproj" />
   </ItemGroup>
 
 </Project>
