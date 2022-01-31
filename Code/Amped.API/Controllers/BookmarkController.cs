@@ -21,7 +21,7 @@ namespace Amped.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromServices] IBus bus, CreateBookmarkCommand command)
         {
-            await bus.Send(command);
+            await bus.Publish(command);
             return Accepted();
         }
         

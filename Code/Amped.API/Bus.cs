@@ -12,7 +12,7 @@ namespace Amped.API
             _bus = bus;
         }
 
-        public Task Send<T>(T message) where T : class => _bus.Publish(message);
+        public Task Send<T>(T message) where T : class => _bus.Send(message);
         
         public Task Publish<T>(T message) where T : class => _bus.Publish(message);
     }
