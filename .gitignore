@@ -354,4 +354,5 @@ MigrationBackup/
 .idea
 
 # Code coverage
-/Code/Amped.API.Tests/lcov.info
+/Code/Amped.API.Tests/coverage.info
+
