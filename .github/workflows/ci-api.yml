@@ -57,7 +57,7 @@ jobs:
         shell: sh
         working-directory: './Code'
         run: |
-          ../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="./Amped.API.Tests/coverage.info"
+          ../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
           dotnet build --configuration Release --no-restore
       - name: Test
         working-directory: './Code'
