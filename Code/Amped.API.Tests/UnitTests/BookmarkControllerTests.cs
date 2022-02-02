@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Amped.API.Controllers;
+using Amped.Core;
 using Amped.Core.NewBookmark;
 using NSubstitute;
 using Xunit;
@@ -18,8 +19,7 @@ namespace Amped.API.Tests.UnitTests
                 Uri = new Uri("https://app.totallyampednow.com")
             };
 
-            var bus = Substitute.For<IBus>();
-            
+            var bus = Substitute.For<ICommandQueue>();
             var sut = new BookmarkController();
             
             // Act

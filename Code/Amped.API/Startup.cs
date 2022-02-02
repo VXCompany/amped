@@ -23,7 +23,8 @@ namespace Amped.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IBookmarkRepository, BookmarkRepository>();
-            services.AddTransient<IBus, Bus>();
+            services.AddTransient<ICommandQueue, CommandQueue>();
+            services.AddTransient<IEventStream, EventStream>();
             services.AddTransient<Queries.IBookmarkRepository, Queries.BookmarkRepository>(); // yuck...
 
             services.AddControllers();
@@ -49,6 +50,8 @@ namespace Amped.API
             });
 
             services.AddMassTransitHostedService();
+            
+            services.AddSignalRCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,10 +10,12 @@ namespace Amped.Core.Tests.UnitTests
     public class NewBookmarkUseCaseTests
     {
         private readonly IBookmarkRepository _repository;
-        
+        private readonly IEventStream _eventStream;
+
         public NewBookmarkUseCaseTests()
         {
             _repository = Substitute.For<IBookmarkRepository>();
+            _eventStream = Substitute.For<IEventStream>();
         }
         
         [Fact]
@@ -25,7 +27,7 @@ namespace Amped.Core.Tests.UnitTests
                 Uri = new Uri("https://totallyamped.com")
             };
             
-            var sut = new CreateBookmarkCommandHandler(_repository);
+            var sut = new CreateBookmarkCommandHandler(_repository, _eventStream);
 
             // act
             var command = new TestConsumeContextBuilder<CreateBookmarkCommand>()
@@ -41,7 +43,7 @@ namespace Amped.Core.Tests.UnitTests
         [Fact]
         public void Constructor_Requires_BookmarkRepository()
         {
-            Action actual = () => new CreateBookmarkCommandHandler(null);
+            Action actual = () => new CreateBookmarkCommandHandler(null, _eventStream);
 
             actual.Should().Throw<ArgumentNullException>().WithParameterName("bookmarkRepository");
         }

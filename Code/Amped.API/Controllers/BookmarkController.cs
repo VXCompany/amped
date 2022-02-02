@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Amped.Core;
 using Microsoft.AspNetCore.Mvc;
 using Amped.Core.NewBookmark;
 
@@ -13,15 +14,14 @@ namespace Amped.API.Controllers
         public async Task<IActionResult> Get([FromServices] Queries.IBookmarkRepository repository)
         {
             var bookmarks = await repository.GetAll();
-            
             return Ok(bookmarks);
         }        
         
         [Route("create")]
         [HttpPost]
-        public async Task<IActionResult> Create([FromServices] IBus bus, CreateBookmarkCommand command)
+        public async Task<IActionResult> Create([FromServices] ICommandQueue queue, CreateBookmarkCommand command)
         {
-            await bus.Publish(command);
+            await queue.Send(command);
             return Accepted();
         }
         
