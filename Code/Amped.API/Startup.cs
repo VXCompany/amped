@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MassTransit;
+using Microsoft.Extensions.Options;
 
 namespace Amped.API
 {
@@ -37,19 +38,30 @@ namespace Amped.API
             {
                 x.AddConsumer<CreateBookmarkCommandHandler>();
 
-                x.UsingRabbitMq((context, cfg) =>
+                x.UsingGrpc((context, cfg) =>
                 {
-                    cfg.Host("localhost", "/", h =>
-                    {
-                        h.Username("user");
-                        h.Password("PASSWORD");
-                    });
+                    var options = context.GetRequiredService<IOptions<StartupOptions>>();
                     
+                    cfg.Host(h =>
+                    {
+                        h.Host = options.Value.Host ?? "127.0.0.1";
+                        h.Port = options.Value.Port ?? 19796;
+
+                        foreach (var host in options.Value.GetServers())
+                            h.AddServer(host);
+                    });
+
                     cfg.ConfigureEndpoints(context);
                 });
             });
 
             services.AddMassTransitHostedService();
+            
+            services.AddOptions<StartupOptions>()
+                .Configure<IConfiguration>((options, config) =>
+                {
+                    config.Bind(options);
+                });
             
             services.AddSignalRCore();
         }
