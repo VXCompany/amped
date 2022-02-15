@@ -1,39 +1,28 @@
+using System.Threading.Tasks;
+using Amped.Core;
 using Microsoft.AspNetCore.Mvc;
-using Amped.API.Core;
+using Amped.Core.NewBookmark;
 
- namespace Amped.API.Controllers
+namespace Amped.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class BookmarkController : ControllerBase
     {
-        private readonly IBookmarkRepository _bookmarkRepository;
-
-        public BookmarkController(IBookmarkRepository bookmarkRepository)
-        {
-            _bookmarkRepository = bookmarkRepository;
-        }
-
         [Route("all")]
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromServices] Queries.IBookmarkRepository repository)
         {
-            return Ok(new []
-            {
-                (object) new { id = 1, uri = "https://test1.com/amped-is-the-bomb" },
-                new { id = 2, uri = "https://test2.com/why-amped-rulez", read = true }
-            });
+            var bookmarks = await repository.GetAll();
+            return Ok(bookmarks);
         }        
         
         [Route("create")]
         [HttpPost]
-        public IActionResult Create(CreateBookmarkRequest createBookmarkRequest)
+        public async Task<IActionResult> Create([FromServices] ICommandQueue queue, CreateBookmarkCommand command)
         {
-            var bookmark = Bookmark.CreateUnreadBookmark(createBookmarkRequest.Uri, "Fred");
-
-            _bookmarkRepository.Add(bookmark);
-
-            return Ok();
+            await queue.Send(command);
+            return Accepted();
         }
         
         [HttpPost("markAsRead")]
