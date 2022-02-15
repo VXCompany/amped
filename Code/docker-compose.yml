@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  amped.api:
+    image: ${DOCKER_REGISTRY-}ampedapi
+    build:
+      context: .
+      dockerfile: Amped.API/Dockerfile
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    
