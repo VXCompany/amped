@@ -352,3 +352,7 @@ MigrationBackup/
 # General
 .DS_Store
 .idea
+
+# Code coverage
+/Code/Amped.API.Tests/coverage.info
+
