@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MassTransit;
+using Microsoft.Extensions.Options;
 
 namespace Amped.API;
 
@@ -32,25 +33,36 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Amped.API", Version = "v1" });
         });
-            
+        
         services.AddMassTransit(x =>
         {
             x.AddConsumer<CreateBookmarkCommandHandler>();
 
-            x.UsingRabbitMq((context, cfg) =>
+            x.UsingGrpc((context, cfg) =>
             {
-                cfg.Host("localhost", "/", h =>
+                var options = context.GetRequiredService<IOptions<StartupOptions>>();
+                
+                cfg.Host(h =>
                 {
-                    h.Username("user");
-                    h.Password("PASSWORD");
+                    h.Host = options.Value.Host ?? "127.0.0.1";
+                    h.Port = options.Value.Port ?? 19796;
+
+                    foreach (var host in options.Value.GetServers())
+                        h.AddServer(host);
                 });
-                    
+
                 cfg.ConfigureEndpoints(context);
             });
         });
 
         services.AddMassTransitHostedService();
-            
+        
+        services.AddOptions<StartupOptions>()
+            .Configure<IConfiguration>((options, config) =>
+            {
+                config.Bind(options);
+            });
+        
         services.AddSignalRCore();
     }
 
@@ -65,14 +77,12 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-
         app.UseRouting();
-
         app.UseAuthorization();
-
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
         });
     }
 }
+
