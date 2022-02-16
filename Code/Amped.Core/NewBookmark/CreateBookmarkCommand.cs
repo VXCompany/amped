@@ -1,11 +1,10 @@
 using System;
 
-namespace Amped.Core.NewBookmark
+namespace Amped.Core.NewBookmark;
+
+public class CreateBookmarkCommand
 {
-    public class CreateBookmarkCommand
-    {
-        // todo: Implement correlation id
+    // todo: Implement correlation id
         
-        public Uri Uri { get; set; }
-    }
+    public Uri Uri { get; set; }
 }

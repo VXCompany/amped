@@ -5,31 +5,30 @@ using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace Amped.API.Tests.IntegrationTests
+namespace Amped.API.Tests.IntegrationTests;
+
+public class TestWebApplicationFactory : WebApplicationFactory<Program>
 {
-    public class TestWebApplicationFactory : WebApplicationFactory<Program>
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        protected override void ConfigureWebHost(IWebHostBuilder builder)
-        {
             
-            builder.ConfigureServices(services =>
+        builder.ConfigureServices(services =>
+        {
+            services
+                .Where(d => d.ServiceType.Namespace.Contains("MassTransit", StringComparison.OrdinalIgnoreCase))
+                .ToList()
+                .ForEach(d => services.Remove(d));
+                
+            services.AddMassTransit(x =>
             {
-                services
-                    .Where(d => d.ServiceType.Namespace.Contains("MassTransit", StringComparison.OrdinalIgnoreCase))
-                    .ToList()
-                    .ForEach(d => services.Remove(d));
+                x.AddConsumer<CreateBookmarkCommandHandler>();
                 
-                services.AddMassTransit(x =>
+                x.UsingInMemory((context, cfg) =>
                 {
-                    x.AddConsumer<CreateBookmarkCommandHandler>();
-                
-                    x.UsingInMemory((context, cfg) =>
-                    {
-                        cfg.TransportConcurrencyLimit = 100;
-                        cfg.ConfigureEndpoints(context);
-                    });
+                    cfg.TransportConcurrencyLimit = 100;
+                    cfg.ConfigureEndpoints(context);
                 });
             });
-        }
+        });
     }
 }

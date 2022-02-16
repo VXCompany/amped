@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Amped.Core
+namespace Amped.Core;
+
+public interface IEventStream
 {
-    public interface IEventStream
-    {
-        Task Broadcast<T>(T message) where T : class;
-    }
+    Task Broadcast<T>(T message) where T : class;
 }
