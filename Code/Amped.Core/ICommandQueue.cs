@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Amped.Core
+namespace Amped.Core;
+
+public interface ICommandQueue
 {
-    public interface ICommandQueue
-    {
-        Task Send<T>(T command) where T : class;
-    }
+    Task Send<T>(T command) where T : class;
 }
