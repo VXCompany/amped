@@ -32,26 +32,34 @@ namespace Amped.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Amped.API", Version = "v1" });
             });
-            
+
+            configureMassTransit(services);
+
+            services.AddSignalRCore();
+        }
+
+        private void configureMassTransit(IServiceCollection services)
+        {
+            var rabbitMQHost = Configuration.GetValue<string>("RABBITMQ_HOST");
+            var rabbitMQPort = Configuration.GetValue<ushort>("RABBITMQ_PORT");
+            var rabbitMQUser = Configuration.GetValue<string>("RABBITMQ_USER");
+            var rabbitMQPassword = Configuration.GetValue<string>("RABBITMQ_PASSWORD");
+
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<CreateBookmarkCommandHandler>();
-
                 x.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.Host("localhost", "/", h =>
+                    cfg.Host(rabbitMQHost, rabbitMQPort, "/", h =>
                     {
-                        h.Username("user");
-                        h.Password("PASSWORD");
+                        h.Username(rabbitMQUser);
+                        h.Password(rabbitMQPassword);
                     });
-                    
+
                     cfg.ConfigureEndpoints(context);
                 });
             });
-
             services.AddMassTransitHostedService();
-            
-            services.AddSignalRCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,7 +76,7 @@ namespace Amped.API
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {
