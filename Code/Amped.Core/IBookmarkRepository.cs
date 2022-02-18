@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Amped.Core
+namespace Amped.Core;
+
+public interface IBookmarkRepository
 {
-    public interface IBookmarkRepository
-    {
-        Task Add(Bookmark bookmark);
-    }
+    Task Add(Bookmark bookmark);
 }

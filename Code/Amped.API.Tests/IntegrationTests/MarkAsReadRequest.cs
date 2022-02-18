@@ -1,7 +1,6 @@
-﻿namespace Amped.API.Tests.IntegrationTests
+﻿namespace Amped.API.Tests.IntegrationTests;
+
+internal class MarkAsReadRequest
 {
-    internal class MarkAsReadRequest
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

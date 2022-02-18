@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using System.Net.Http;
+﻿using System.Net.Http;
 
-namespace Amped.API.Tests.IntegrationTests
+namespace Amped.API.Tests.IntegrationTests;
+
+public class ApiTestClientBuilder
 {
-    public class ApiTestClientBuilder
-    {
-        public HttpClient Build()
-        {
-            var factory = new WebApplicationFactory<Startup>();
-            return factory.CreateClient();
-        }
+    public HttpClient Build()
+    {   
+        var factory = new TestWebApplicationFactory();
+        return factory.CreateClient();
     }
 }

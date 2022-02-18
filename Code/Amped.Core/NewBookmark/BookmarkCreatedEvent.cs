@@ -1,12 +1,11 @@
 using System;
 
-namespace Amped.Core.NewBookmark
+namespace Amped.Core.NewBookmark;
+
+public class BookmarkCreatedEvent
 {
-    public class BookmarkCreatedEvent
-    {
-        // todo: Implement correlation id
+    // todo: Implement correlation id
         
-        public Uri Uri { get; set; }
-        public object Owner { get; set; }
-    }
+    public Uri Uri { get; set; }
+    public object Owner { get; set; }
 }

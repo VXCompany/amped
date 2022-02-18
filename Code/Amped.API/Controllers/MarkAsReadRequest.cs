@@ -1,7 +1,6 @@
-﻿namespace Amped.API.Controllers
+﻿namespace Amped.API.Controllers;
+
+public class MarkAsReadRequest
 {
-    public class MarkAsReadRequest
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }
