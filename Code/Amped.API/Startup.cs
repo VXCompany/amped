@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MassTransit;
-using Microsoft.Extensions.Options;
 
 namespace Amped.API;
 
@@ -34,32 +33,27 @@ public class Startup
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Amped.API", Version = "v1" });
             });
 
-            configureMassTransit(services);
-        services.AddOptions<StartupOptions>()
-           .Configure<IConfiguration>((options, config) =>
-           {
-               config.Bind(options);
-           });
+            ConfigureMassTransit(services);
 
         services.AddSignalRCore();
         }
 
-        private void configureMassTransit(IServiceCollection services)
+        private void ConfigureMassTransit(IServiceCollection services)
         {
-            var rabbitMQHost = Configuration.GetValue<string>("RABBITMQ_HOST");
-            var rabbitMQPort = Configuration.GetValue<ushort>("RABBITMQ_PORT");
-            var rabbitMQUser = Configuration.GetValue<string>("RABBITMQ_USER");
-            var rabbitMQPassword = Configuration.GetValue<string>("RABBITMQ_PASSWORD");
+            var rabbitMqHost = Configuration.GetValue<string>("RABBITMQ_HOST");
+            var rabbitMqPort = Configuration.GetValue<ushort>("RABBITMQ_PORT");
+            var rabbitMqUser = Configuration.GetValue<string>("RABBITMQ_USER");
+            var rabbitMqPassword = Configuration.GetValue<string>("RABBITMQ_PASSWORD");
 
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<CreateBookmarkCommandHandler>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.Host(rabbitMQHost, rabbitMQPort, "/", h =>
+                    cfg.Host(rabbitMqHost, rabbitMqPort, "/", h =>
                     {
-                        h.Username(rabbitMQUser);
-                        h.Password(rabbitMQPassword);
+                        h.Username(rabbitMqUser);
+                        h.Password(rabbitMqPassword);
                     });
 
                     cfg.ConfigureEndpoints(context);
