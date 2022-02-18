@@ -38,19 +38,14 @@ public class Startup
         {
             x.AddConsumer<CreateBookmarkCommandHandler>();
 
-            x.UsingGrpc((context, cfg) =>
+            x.UsingRabbitMq((context, cfg) =>
             {
-                var options = context.GetRequiredService<IOptions<StartupOptions>>();
-                
-                cfg.Host(h =>
+                cfg.Host("localhost", "/", h =>
                 {
-                    h.Host = options.Value.Host ?? "127.0.0.1";
-                    h.Port = options.Value.Port ?? 19796;
-
-                    foreach (var host in options.Value.GetServers())
-                        h.AddServer(host);
+                    h.Username("user");
+                    h.Password("PASSWORD");
                 });
-
+                    
                 cfg.ConfigureEndpoints(context);
             });
         });
