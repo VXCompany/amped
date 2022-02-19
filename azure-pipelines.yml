@@ -41,5 +41,6 @@ stages:
         repository: 'ampedapi'
         command: 'buildAndPush'
         Dockerfile: './Code/Amped.API/Dockerfile'
+        buildContext: './Code'
 
   
