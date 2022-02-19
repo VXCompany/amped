@@ -32,6 +32,7 @@ stages:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--configuration Release --no-restore'
+        workingDirectory: './Code'
     
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -39,6 +40,6 @@ stages:
         containerRegistry: 'Azure ACR - yuriburger'
         repository: 'ampedapi'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: './Code/**/Dockerfile'
 
   
