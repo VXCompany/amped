@@ -40,6 +40,6 @@ stages:
         containerRegistry: 'Azure ACR - yuriburger'
         repository: 'ampedapi'
         command: 'buildAndPush'
-        Dockerfile: './Code/**/Dockerfile'
+        Dockerfile: './Code/Amped.API/Dockerfile'
 
   
