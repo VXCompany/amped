@@ -41,5 +41,4 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
 
-- stage: DeployTest
   
