@@ -1,10 +1,10 @@
-trigger:
- branches:
-   include:
-     - main
- paths:
-   include:
-   - Infra/*
+trigger: none
+# branches:
+#   include:
+#     - main
+# paths:
+#   include:
+#   - Infra/*
 
 pr: none
 
