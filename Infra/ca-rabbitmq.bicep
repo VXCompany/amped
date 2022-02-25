@@ -23,6 +23,7 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
           value: rabbitUsername
         }
       ]
+      activeRevisionsMode: 'single'
       ingress: {
         external: false
         targetPort: 5672

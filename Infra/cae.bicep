@@ -3,7 +3,7 @@ param logClientSecret string
 param location string
 var name = 'cae-amped-westeu-001'
 
-resource env 'Microsoft.Web/kubeEnvironments@2021-02-01' = {
+resource cae 'Microsoft.Web/kubeEnvironments@2021-02-01' = {
   name: name
   location: location
   properties: {
@@ -18,4 +18,4 @@ resource env 'Microsoft.Web/kubeEnvironments@2021-02-01' = {
     }
   }
 }
-output id string = env.id
+output id string = cae.id

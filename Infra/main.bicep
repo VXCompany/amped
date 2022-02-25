@@ -1,12 +1,6 @@
-param containerImage string
-param containerPort int
-param registry string
-param registryUsername string
 param rabbitUsername string
 param location string = resourceGroup().location
 
-@secure()
-param registryPassword string
 @secure()
 param rabbitPassword string
 
@@ -36,21 +30,3 @@ module rabbitmq 'ca-rabbitmq.bicep' = {
     rabbitPassword: rabbitPassword
   }
 }
-
-module api 'ca-api.bicep' = {
-  name: 'ampedapi'
-  params: {
-    location: location
-    containerAppEnvironmentId: cae.outputs.id
-    containerImage: containerImage
-    containerPort: containerPort
-    rabbitUsername: rabbitUsername
-    rabbitPassword: rabbitPassword
-    rabbitHost: rabbitmq.outputs.fqdn
-    useExternalIngress: true
-    registry: registry
-    registryUsername: registryUsername
-    registryPassword: registryPassword
-  }
-}
-output fqdn string = api.outputs.fqdn

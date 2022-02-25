@@ -44,6 +44,7 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
           passwordSecretRef: 'container-registry-password'
         }
       ]
+      activeRevisionsMode: 'single'
       ingress: {
         external: useExternalIngress
         targetPort: containerPort
