@@ -1,4 +1,4 @@
-trigger: none
+﻿trigger: none
 
 pr: none
 
@@ -20,5 +20,6 @@ stages:
         command: 'buildAndPush'
         Dockerfile: './Code/Amped.API/Dockerfile'
         buildContext: './Code'
+        tags: '$(Build.BuildId)'
 
   

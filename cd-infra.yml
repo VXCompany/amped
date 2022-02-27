@@ -31,6 +31,7 @@ stages:
         PathtoPublish: '$(Build.SourcesDirectory)/Infra/main.json'
         ArtifactName: 'infra'
         publishLocation: 'Container'
+
 - stage: DeployTest
   jobs:
   - deployment: InfraToAzure
@@ -51,4 +52,4 @@ stages:
                 az deployment group create  `
                 --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
                 --resource-group 'totallyamped.tech' `
-                --parameters env=qa 
+                --parametersrabbitUsername=${env:RABBITMQ_DEFAULT_USER} rabbitPassword=${env:RABBITMQ_DEFAULT_PASS}

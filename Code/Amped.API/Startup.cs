@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MassTransit;
-using Microsoft.Extensions.Options;
 
 namespace Amped.API;
 
@@ -28,38 +27,40 @@ public class Startup
         services.AddTransient<IEventStream, EventStream>();
         services.AddTransient<Queries.IBookmarkRepository, Queries.BookmarkRepository>(); // yuck...
 
-        services.AddControllers();
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Amped.API", Version = "v1" });
-        });
-        
-        services.AddMassTransit(x =>
-        {
-            x.AddConsumer<CreateBookmarkCommandHandler>();
-
-            x.UsingRabbitMq((context, cfg) =>
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
             {
-                cfg.Host("localhost", "/", h =>
-                {
-                    h.Username("user");
-                    h.Password("PASSWORD");
-                });
-                    
-                cfg.ConfigureEndpoints(context);
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Amped.API", Version = "v1" });
             });
-        });
 
-        services.AddMassTransitHostedService();
-        
-        services.AddOptions<StartupOptions>()
-            .Configure<IConfiguration>((options, config) =>
-            {
-                config.Bind(options);
-            });
-        
+            ConfigureMassTransit(services);
+
         services.AddSignalRCore();
-    }
+        }
+
+        private void ConfigureMassTransit(IServiceCollection services)
+        {
+            var rabbitMqHost = Configuration.GetValue<string>("RABBITMQ_HOST");
+            var rabbitMqPort = Configuration.GetValue<ushort>("RABBITMQ_PORT");
+            var rabbitMqUser = Configuration.GetValue<string>("RABBITMQ_USER");
+            var rabbitMqPassword = Configuration.GetValue<string>("RABBITMQ_PASSWORD");
+
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<CreateBookmarkCommandHandler>();
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(rabbitMqHost, rabbitMqPort, "/", h =>
+                    {
+                        h.Username(rabbitMqUser);
+                        h.Password(rabbitMqPassword);
+                    });
+
+                    cfg.ConfigureEndpoints(context);
+                });
+            });
+            services.AddMassTransitHostedService();
+        }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
