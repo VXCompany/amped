@@ -1,17 +1,32 @@
-// params
-@allowed([
-  'qa'
-  'prod'
-])
-@description('Environment (QA/PROD) for the web app and app service plan.')
-param env string
+param rabbitUsername string
+param location string = resourceGroup().location
 
-// vars
+@secure()
+param rabbitPassword string
 
-// modules
-module webapp './webapp.bicep' = {
-  name: 'webapp'
+module log 'log.bicep' = {
+    name: 'log-analytics-workspace'
+    params: {
+      location: location
+    }
+}
+
+module cae 'cae.bicep' = {
+  name: 'container-app-environment'
   params: {
-    env: env
+    location: location
+    logClientId:log.outputs.clientId
+    logClientSecret: log.outputs.clientSecret
+  }
+}
+
+module rabbitmq 'ca-rabbitmq.bicep' = {
+  name: 'rabbitmq'
+  params: {
+    location: location
+    containerAppEnvironmentId: cae.outputs.id
+    containerImage: 'docker.io/rabbitmq:3-management-alpine'
+    rabbitUsername: rabbitUsername
+    rabbitPassword: rabbitPassword
   }
 }
