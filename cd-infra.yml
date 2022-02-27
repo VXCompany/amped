@@ -1,10 +1,10 @@
-trigger: none
-# branches:
-#   include:
-#     - main
-# paths:
-#   include:
-#   - Infra/*
+trigger: 
+ branches:
+   include:
+     - main
+ paths:
+   include:
+   - Infra/*
 
 pr: none
 
@@ -52,4 +52,4 @@ stages:
                 az deployment group create  `
                 --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
                 --resource-group 'totallyamped.tech' `
-                --parametersrabbitUsername=${env:RABBITMQ_DEFAULT_USER} rabbitPassword=${env:RABBITMQ_DEFAULT_PASS}
+                --parameters rabbitUsername=${env:RABBITMQ_DEFAULT_USER} rabbitPassword=${env:RABBITMQ_DEFAULT_PASS}
