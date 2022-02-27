@@ -7,16 +7,19 @@ pool:
 
 stages:
 
-  - stage: Build
-    jobs:
-      - job: Build
-        steps:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+        
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        containerRegistry: 'Azure ACR - yuriburger'
+        repository: 'ampedapi'
+        command: 'buildAndPush'
+        Dockerfile: './Code/Amped.API/Dockerfile'
+        buildContext: './Code'
+        tags: '$(Build.BuildId)'
 
-          - task: Docker@2
-            displayName: Build and push an image to container registry
-            inputs:
-              containerRegistry: 'Azure ACR - yuriburger'
-              repository: 'ampedapi'
-              command: 'buildAndPush'
-              Dockerfile: './Code/Amped.API/Dockerfile'
-              buildContext: './Code'
+  
