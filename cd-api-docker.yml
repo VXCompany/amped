@@ -42,6 +42,9 @@ stages:
                   az deployment group create  `
                   --template-file $(Build.SourcesDirectory)/Infra/api.bicep `
                   --resource-group 'totallyamped.tech' `
-                  --parameters containerImage=amped.azurecr.io/ampedapi:$(Build.BuildId) rabbitUsername=${env:RABBITMQ_USER} rabbitPassword=${env:RABBITMQ_PASS} containerPort=80 registry=amped.azurecr.io registryUsername=${env:REGISTRY_USER} registryPassword=${env:REGISTRY_PASS}
+                  --parameters containerImage=amped.azurecr.io/ampedapi:$(Build.BuildId) 
+                  --parameters rabbitUsername=${env:RABBITMQ_USER} rabbitPassword=${env:RABBITMQ_PASS} 
+                  --parameters containerPort=80 registry=amped.azurecr.io 
+                  --parameters registryUsername=${env:REGISTRY_USER} registryPassword=ebeD4g6Z
                   
 
