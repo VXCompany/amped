@@ -10,8 +10,7 @@ stages:
 - stage: Build
   jobs:
   - job: Build
-    steps:
-        
+    steps: 
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
@@ -23,3 +22,28 @@ stages:
         tags: '$(Build.BuildId)'
 
   
+- stage: DeployTest
+  jobs:
+    - deployment: APIToAzure
+      displayName: 'Deploy to Azure'
+      environment: 'AzureTest'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - checkout: self
+            - task: AzureCLI@2
+              displayName: 'Deploy template'
+              inputs:
+                azureSubscription: 'Azure MPN - yuriburger'
+                scriptType: 'pscore'
+                scriptLocation: 'inlineScript'
+                inlineScript: |
+                  az deployment group create  `
+                  --template-file $(Build.SourcesDirectory)/Infra/api.bicep `
+                  --resource-group 'totallyamped.tech' `
+                  --parameters rabbitUsername=${env:RABBITMQ_USER} rabbitPassword=${env:RABBITMQ_PASS} `
+                  containerPort=80 registry=amped.azurecr.io `
+                  registryUsername=${env:REGISTRY_USER} registryPassword=${env:REGISTRY_PASS}
+                  
+
