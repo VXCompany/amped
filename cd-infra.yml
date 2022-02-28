@@ -44,6 +44,8 @@ stages:
           - checkout: self
           - task: AzureCLI@2
             displayName: 'Deploy template'
+            env:
+              MY_RABBITMQ_DEFAULT_PASS: $(RABBITMQ_DEFAULT_PASS)
             inputs:
               azureSubscription: 'Azure MPN - yuriburger' 
               scriptType: 'pscore'
@@ -52,4 +54,4 @@ stages:
                 az deployment group create  `
                 --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
                 --resource-group 'totallyamped.tech' `
-                --parameters rabbitUsername=${env:RABBITMQ_DEFAULT_USER} rabbitPassword=${env:RABBITMQ_DEFAULT_PASS}
+                --parameters rabbitUsername=$env:RABBITMQ_DEFAULT_USER rabbitPassword=$env:MY_RABBITMQ_DEFAULT_PASS
