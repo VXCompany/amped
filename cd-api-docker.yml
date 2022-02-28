@@ -9,6 +9,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+resources:
+  containers:
+  - container: zap
+    image: vxcompanybv/zap2docker-ado:2.11.1
+
 stages:
 
 - stage: Build
