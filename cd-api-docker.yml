@@ -1,6 +1,10 @@
-trigger: none
-
-pr: none
+trigger: 
+  branches:
+    include:
+      - main
+  paths:
+    include:
+    - Code/*
 
 pool:
   vmImage: ubuntu-latest
