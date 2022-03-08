@@ -1,12 +1,10 @@
-trigger: none
-# branches:
-#   include:
-#     - main
-# paths:
-#   include:
-#   - Code/*
-
-pr: none
+trigger: 
+  branches:
+    include:
+      - main
+  paths:
+    include:
+    - Code/*
 
 pool:
   vmImage: ubuntu-latest
@@ -21,54 +19,46 @@ stages:
 - stage: Build
   jobs:
   - job: Build
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore API'
+    steps: 
+    - task: Docker@2
+      displayName: Build and push an image to container registry
       inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
-        workingDirectory: './Code'
+        containerRegistry: 'Azure ACR - yuriburger'
+        repository: 'ampedapi'
+        command: 'buildAndPush'
+        Dockerfile: './Code/Amped.API/Dockerfile'
+        buildContext: './Code'
+        tags: '$(Build.BuildId)'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Test API'
-      inputs:
-        command: 'test'
-        projects: '**/*.csproj'
-        arguments: '--no-restore --verbosity normal'
-        workingDirectory: './Code'
-
-    - task: DotNetCoreCLI@2
-      displayName: 'Build API'
-      inputs:
-        command: 'build'
-        projects: '**/*.csproj'
-        arguments: '--configuration Release --no-restore'
-        workingDirectory: './Code'
-
+  
 - stage: DeployTest
   jobs:
-  - deployment: APIToAzure
-    displayName: 'Deploy to Azure'
-    environment: 'AzureTest'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - checkout: self
-          - task: DotNetCoreCLI@2
-            displayName: 'Publish API'
-            inputs:
-              command: 'publish'
-              publishWebProjects: true
-              workingDirectory: './Code'
-          - task: AzureWebApp@1
-            displayName: 'Deploy API'
-            inputs:
-              azureSubscription: 'Azure MPN - yuriburger'
-              appType: 'webAppLinux'
-              appName: 'app-amped-api-qa-westeu-001'
-              package: '$(System.DefaultWorkingDirectory)/Code/**/*.zip'
-
+    - deployment: APIToAzure
+      displayName: 'Deploy to Azure'
+      environment: 'AzureTest'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - checkout: self
+            - task: AzureCLI@2
+              displayName: 'Deploy template'
+              env:
+                MY_RABBITMQ_PASS: $(RABBITMQ_PASS)
+                MY_REGISTRY_PASS: $(REGISTRY_PASS)
+              inputs:
+                azureSubscription: 'Azure MPN - yuriburger'
+                scriptType: 'pscore'
+                scriptLocation: 'inlineScript'
+                inlineScript: |
+                  az deployment group create  `
+                  --template-file $(Build.SourcesDirectory)/Infra/api.bicep `
+                  --resource-group 'totallyamped.tech' `
+                  --parameters containerImage=amped.azurecr.io/ampedapi:$(Build.BuildId) `
+                  rabbitUsername=$env:RABBITMQ_USER rabbitPassword=$env:MY_RABBITMQ_PASS `
+                  containerPort=80 registry=amped.azurecr.io `
+                  registryUsername=$env:REGISTRY_USER registryPassword=$env:MY_REGISTRY_PASS
+                  
 - stage: Test
   jobs:
   - job: ZAP
@@ -97,6 +87,3 @@ stages:
         loadTestConfigFile: './Test/Load/api-load.yaml'
         resourceGroup: 'totallyamped.tech'
         loadTestResource: 'lt-amped-qa-westeu-001'
-
-
-
