@@ -7,9 +7,13 @@ import CreateBookmark from './CreateBookmark.svelte';
 	let bookmarks = []
 
 	onMount(async () => {
+		await fetchBookmarks();
+	})
+
+	async function fetchBookmarks() {
 		const res = await fetch("http://localhost:5001/api/Bookmark/all");
 		bookmarks = await res.json();
-	})
+	}
 </script>
 
 <main>
@@ -17,7 +21,7 @@ import CreateBookmark from './CreateBookmark.svelte';
 	<p>Ik wil een front-end met leuke kleurtjes!</p>
 
 	<BookmarkList bookmarks={bookmarks} />
-	<CreateBookmark/>
+	<CreateBookmark on:created={fetchBookmarks} />
 </main>
 
 <style>

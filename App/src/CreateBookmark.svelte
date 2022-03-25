@@ -1,46 +1,57 @@
 <script>
-    import { createFieldValidator } from './validation';
-    import { uriValidator, requiredValidator } from './validators.js'
-    let uri = '';
-    function createBookmark() {
+import { createEventDispatcher } from "svelte";
 
-        console.log(uri);
+    import { createFieldValidator } from "./validation";
+    import { uriValidator, requiredValidator } from "./validators.js";
+    
+    let uri = "";
+
+    const dispatch = createEventDispatcher();
+
+    async function createBookmark() {
+        const response = await fetch('http://localhost:5001/api/Bookmark/create', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ uri: uri })
+        });
+
+        dispatch('created');
     }
 
-    const [ validity, validate ] = createFieldValidator(requiredValidator(), uriValidator())
+    const [validity, validate] = createFieldValidator(
+        requiredValidator(),
+        uriValidator()
+    );
 
-    // function validateUri () {
-    //     return function foo (value) {
-    //         console.log('validating')
-    //       return (value !== 'uri') || 'Deze uri is ongeldig'
-    //     }
-    // }
 </script>
 
 <form on:submit|preventDefault={createBookmark}>
     <h2>Nieuwe bookmark</h2>
-    <input 
-    type="text" 
-    placeholder="uri" 
-    bind:value={uri} 
-    required
-    class:field-danger={!$validity.valid}
-    class:field-success={$validity.valid}
-    use:validate={uri}>
-    <button>Opslaan</button> 
+    <input
+        type="text"
+        placeholder="uri"
+        bind:value={uri}
+        required
+        class:field-danger={!$validity.valid}
+        class:field-success={$validity.valid}
+        use:validate={uri}
+    />
+    <button>Opslaan</button>
 </form>
 
 <style>
     input {
-		outline: none;
-		border-width: 2px;
-	}
+        outline: none;
+        border-width: 2px;
+    }
 
-    	.field-danger {
-		border-color: red;
-	}
-	
-	.field-success {
-		border-color: green;
-	}
+    .field-danger {
+        border-color: red;
+    }
+
+    .field-success {
+        border-color: green;
+    }
 </style>
