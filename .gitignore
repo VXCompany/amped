@@ -356,3 +356,4 @@ MigrationBackup/
 # Code coverage
 /Code/Amped.API.Tests/coverage.info
 
+/Code/Amped.API/amped.db
