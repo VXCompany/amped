@@ -5,7 +5,7 @@ namespace Amped.Queries;
 
 public class Bookmark
 {
-    public int Id { get; set; }
+    // public int Id { get; set; }
         
     public Uri Uri { get; set; }
         
