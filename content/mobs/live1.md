@@ -1,4 +1,4 @@
-# Live programming session: Building a UI with Svelte #1
+# Live programming session: Building a UI with Svelte part 1
 
 This video is a recording of a live programming session from March the 10th. Content is in Dutch.
 
