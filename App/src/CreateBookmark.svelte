@@ -1,18 +1,20 @@
 <script>
-import { createEventDispatcher } from "svelte";
+import { createEventDispatcher } from 'svelte';
 
-    import { createFieldValidator } from "./validation";
-    import { uriValidator, requiredValidator } from "./validators.js";
+    import { createFieldValidator } from './validation';
+    import { uriValidator, requiredValidator } from './validators.js';
     
     let uri = "";
+
+    const api = AMPED_API_URL || 'http://localhost:5001/api';
 
     const dispatch = createEventDispatcher();
 
     async function createBookmark() {
-        const response = await fetch('http://localhost:5001/api/Bookmark/create', {
+        const response = await fetch(api + '/Bookmark/create', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ uri: uri })
         });

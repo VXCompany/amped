@@ -1,17 +1,19 @@
 <script>
-import { onMount } from "svelte";
+import { onMount } from 'svelte';
 import BookmarkList from './BookmarkList.svelte';
 import CreateBookmark from './CreateBookmark.svelte';
 
 	export let name;
 	let bookmarks = []
 
+	const api = AMPED_API_URL || 'http://localhost:5001/api';
+
 	onMount(async () => {
 		await fetchBookmarks();
 	})
 
 	async function fetchBookmarks() {
-		const res = await fetch("http://localhost:5001/api/Bookmark/all");
+		const res = await fetch(api + '/Bookmark/all');
 		bookmarks = await res.json();
 	}
 </script>
