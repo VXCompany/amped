@@ -354,9 +354,10 @@ MigrationBackup/
 .idea
 
 # Code coverage
-Code/Amped.API.Tests/coverage.info
-Code/Amped.API.Tests/coverage.opencover.xml
+/Code/Amped.API.Tests/coverage.info
+/Code/Amped.API.Tests/coverage.opencover.xml
 
 # SQL Lite db
 /Code/Amped.API/amped.db
+
 
