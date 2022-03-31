@@ -31,26 +31,10 @@ stages:
         command: 'custom'
         workingDir: 'App'
         customCommand: 'run build'
-
-- stage: DeployTest
-  jobs:
-    - deployment: AppToAzure
-      displayName: 'Deploy to Azure'
-      environment: 'AzureTest'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - task: Bash@3
-              inputs:
-                targetType: 'inline'
-                script: |
-                  # Write your commands here
-                  ls -al
-            - task: AzureStaticWebApp@0
-              enabled: false
-              inputs:
-                app_location: 'App/public'
-                skip_app_build: true
-                azure_static_web_apps_api_token: '$(DEPLOYMENT_TOKEN)'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          ls -al
 
