@@ -22,6 +22,9 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './App'
     strategy:
       matrix:
         node-version: [16.x]
@@ -35,8 +38,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install dependencies
-      working-directory: './App'
       run: npm ci
     - name: Build
-      working-directory: './App'
       run: npm run build
