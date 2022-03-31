@@ -31,10 +31,9 @@ stages:
         command: 'custom'
         workingDir: 'App'
         customCommand: 'run build'
-    - task: Bash@3
+    - task: AzureStaticWebApp@0
       inputs:
-        targetType: 'inline'
-        script: |
-          # Write your commands here
-          ls -al
+        app_location: 'App/public'
+        skip_app_build: true
+        azure_static_web_apps_api_token: '$(DEPLOYMENT_TOKEN)'
 
