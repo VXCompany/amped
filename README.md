@@ -1,4 +1,6 @@
-[![CI](https://github.com/VXCompany/amped/actions/workflows/ci-api.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/ci-api.yml)
+[![CI - App](https://github.com/VXCompany/amped/actions/workflows/ci-app.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/ci-app.yml)
+[![CI - API](https://github.com/VXCompany/amped/actions/workflows/ci-api.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/ci-api.yml)
+[![CI - Infra](https://github.com/VXCompany/amped/actions/workflows/ci-infra.yml/badge.svg)](https://github.com/VXCompany/amped/actions/workflows/ci-infra.yml)
 
 # Welcome to Amped!
 
