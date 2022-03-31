@@ -41,7 +41,14 @@ stages:
         runOnce:
           deploy:
             steps:
+            - task: Bash@3
+              inputs:
+                targetType: 'inline'
+                script: |
+                  # Write your commands here
+                  ls -al
             - task: AzureStaticWebApp@0
+              enabled: false
               inputs:
                 app_location: 'App/public'
                 skip_app_build: true
