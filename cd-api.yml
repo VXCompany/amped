@@ -57,10 +57,10 @@ stages:
                   --template-file $(Build.SourcesDirectory)/Infra/api.bicep `
                   --resource-group 'totallyamped.tech' `
                   --parameters containerImageApi=amped.azurecr.io/ampedapi:$(Build.BuildId) `
-                  containerImageRabbit=docker.io/rabbitmq:3-management-alpine `` 
                   rabbitUsername=$env:RABBITMQ_USER rabbitPassword=$env:MY_RABBITMQ_PASS `
                   containerPort=80 registry=amped.azurecr.io `
-                  registryUsername=$env:REGISTRY_USER registryPassword=$env:MY_REGISTRY_PASS
+                  registryUsername=$env:REGISTRY_USER registryPassword=$env:MY_REGISTRY_PASS `` 
+                  containerImageRabbit=docker.io/rabbitmq:3-management-alpine
                   
 - stage: Test
   jobs:
