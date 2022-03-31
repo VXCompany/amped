@@ -75,11 +75,11 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
               }        
               {
                 name: 'RABBITMQ_USER'
-                secretRef: 'rabbitmq-password'
+                secretRef: 'rabbitmq-user'
               }
               {
                 name: 'RABBITMQ_PASSWORD'
-                secretRef: 'rabbitmq-user'  
+                secretRef: 'rabbitmq-password'  
               }
           ]
           resources: {
