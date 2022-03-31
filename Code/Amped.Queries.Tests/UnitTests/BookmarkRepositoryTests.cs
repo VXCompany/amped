@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
@@ -10,10 +10,23 @@ public class BookmarkRepositoryTests
     [Fact]
     public async Task Returns_Bookmarks()
     {
-        var sut = new BookmarkRepository();
+        using var factory = new AmpedDbContextFactory();
+        await using (var context = factory.CreateContext())
+        {
+            var bookmark = Core.Bookmark.CreateUnreadBookmark(new Uri("https://totallyamped.com/why-amped-rulez"), "00000000-0000-0000-0000-000000000001");
 
-        IEnumerable<Bookmark> bookmarks = await sut.GetAll();
+            context.Bookmarks.Add(bookmark);
 
-        bookmarks.Should().NotBeEmpty();
+            await context.SaveChangesAsync();
+        }
+
+        await using (var context = factory.CreateContext())
+        {
+            var sut = new BookmarkRepository(context);
+                
+            var bookmarks = await sut.GetAll();
+        
+            bookmarks.Should().NotBeEmpty();
+        }
     }
 }

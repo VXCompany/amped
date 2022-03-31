@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
+using Amped.Core;
 using Amped.Core.NewBookmark;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Amped.API.Tests.IntegrationTests;
 
@@ -15,7 +17,7 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
         builder.ConfigureServices(services =>
         {
             services
-                .Where(d => d.ServiceType.Namespace.Contains("MassTransit", StringComparison.OrdinalIgnoreCase))
+                .Where(d => d.ServiceType.Namespace != null && d.ServiceType.Namespace.Contains("MassTransit", StringComparison.OrdinalIgnoreCase))
                 .ToList()
                 .ForEach(d => services.Remove(d));
                 
@@ -29,6 +31,15 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
                     cfg.ConfigureEndpoints(context);
                 });
             });
+
+            var dbContextDescriptor = services.First(d => d.ServiceType == typeof(AmpedDbContext));
+            services.Remove(dbContextDescriptor);
+
+            services.AddSqlite<AmpedDbContext>(":memory:");
+
+            var sp = services.BuildServiceProvider();
+            using var scope = sp.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<AmpedDbContext>();
         });
     }
 }

@@ -17,7 +17,7 @@ public class CreateBookmarkCommandHandler : IConsumer<CreateBookmarkCommand>
 
     public async Task Consume(ConsumeContext<CreateBookmarkCommand> context)
     {
-        var bookmark = Bookmark.CreateUnreadBookmark(context.Message.Uri, "Fred");
+        var bookmark = Bookmark.CreateUnreadBookmark(context.Message.Uri, "48FDFD46-27E6-46E5-9852-CEC9DF1FF54B");
             
         await _bookmarkRepository.Add(bookmark);
             

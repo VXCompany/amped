@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amped.Queries.Tests", "Ampe
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7D74488B-41ED-4FF1-B523-FB1AC85794CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amped.Infrastructure", "Amped.Infrastructure\Amped.Infrastructure.csproj", "{2C6A7095-2F97-485A-8B45-C4C70506F78A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{7D74488B-41ED-4FF1-B523-FB1AC85794CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D74488B-41ED-4FF1-B523-FB1AC85794CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D74488B-41ED-4FF1-B523-FB1AC85794CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C6A7095-2F97-485A-8B45-C4C70506F78A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C6A7095-2F97-485A-8B45-C4C70506F78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C6A7095-2F97-485A-8B45-C4C70506F78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C6A7095-2F97-485A-8B45-C4C70506F78A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
