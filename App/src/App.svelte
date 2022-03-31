@@ -32,10 +32,10 @@ import CreateBookmark from './CreateBookmark.svelte';
 
 <main>
 	<h1>Hello {name}!</h1>
-	<p>Ik wil een front-end met leuke kleurtjes!</p>
-
-	<BookmarkList bookmarks={bookmarks} />
+	
 	<CreateBookmark on:created={fetchBookmarks} />
+	<BookmarkList bookmarks={bookmarks} />
+
 </main>
 
 <style>
@@ -44,7 +44,7 @@ import CreateBookmark from './CreateBookmark.svelte';
 	}
 
 	:global(body) {
-		background-color: #dadde1;
+		background-color: #F1F5F9;
 		min-width: 320px;
 	}
 

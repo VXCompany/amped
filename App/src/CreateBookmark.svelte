@@ -28,23 +28,41 @@ import { createEventDispatcher } from 'svelte';
 </script>
 
 <form on:submit|preventDefault={createBookmark}>
-    <h2>Nieuwe bookmark</h2>
-    <input
-        type="text"
-        placeholder="uri"
-        bind:value={uri}
-        required
-        class:field-danger={!$validity.valid}
-        class:field-success={$validity.valid}
-        use:validate={uri}
-    />
-    <button class="btn">Opslaan</button>
+    <div class="wrapper">
+        <div class="container">
+            <input 
+                type="input" placeholder="Url" 
+                bind:value={uri}
+                required
+                class:field-danger={!$validity.valid}
+                class:field-success={$validity.valid}
+                use:validate={uri}
+            />
+            <button type="submit" id="add-btn">Add bookmark</button>
+        </div>
+    </div>
 </form>
 
 <style>
+    
+    .wrapper {
+        margin: 3rem auto;
+        max-width: 40rem;
+        padding: 2rem;
+    }
+
+    .container {
+        display: flex;
+    }
+
     input {
         outline: none;
         border-width: 2px;
+        padding: 0.8rem 1.1rem;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border: solid 2px #94A3B8;
+        flex-grow: 1;
     }
 
     .field-danger {
@@ -55,18 +73,14 @@ import { createEventDispatcher } from 'svelte';
         border-color: green;
     }
 
-    .btn {
-		background-color: #5E44CA;
-		color: white;
-		padding: 0.5rem 1.2rem;
-		border-radius: 15px ;
-		text-decoration: none;
-	}
-
-    input[type="text"]{
-      border-radius:15px;
-      -moz-border-radius:15px;
-      -webkit-border-radius:15px;
+    #add-btn {
+        padding: 0.8rem 1.1rem;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        background-color: #5E44CA;
+        color: white;
+        border: none;
+        cursor: pointer;
     }
 
 </style>
