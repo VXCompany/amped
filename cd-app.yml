@@ -1,17 +1,49 @@
-trigger:
-- none
+trigger: none
+#  branches:
+#    include:
+#      - main
+#  paths:
+#    include:
+#    - App/*
 
 pr: none
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
+stages:
 
-- checkout: self
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
 
-- task: AzureStaticWebApp@0
-  inputs:
-    app_location: '/public'
-    skip_app_build: true
-    azure_static_web_apps_api_token: '$(DEPLOYMENT_TOKEN)'
+    - checkout: self
+    - task: Npm@1
+      displayName: Install dependencies
+      inputs:
+        command: 'ci'
+        workingDir: 'App'
+    
+    - task: Npm@1
+      displayName: Build
+      inputs:
+        command: 'custom'
+        workingDir: 'App'
+        customCommand: 'run build'
+
+- stage: DeployTest
+  jobs:
+    - deployment: AppToAzure
+      displayName: 'Deploy to Azure'
+      environment: 'AzureTest'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: AzureStaticWebApp@0
+              inputs:
+                app_location: '/public'
+                skip_app_build: true
+                azure_static_web_apps_api_token: '$(DEPLOYMENT_TOKEN)'
+
