@@ -6,12 +6,10 @@ import { createEventDispatcher } from 'svelte';
     
     let uri = "";
 
-    const api = AMPED_API_URL || 'http://localhost:5001/api';
-
     const dispatch = createEventDispatcher();
 
     async function createBookmark() {
-        const response = await fetch(api + '/Bookmark/create', {
+        const response = await fetch(AMPED_API_URL + '/Bookmark/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +38,7 @@ import { createEventDispatcher } from 'svelte';
         class:field-success={$validity.valid}
         use:validate={uri}
     />
-    <button>Opslaan</button>
+    <button class="btn">Opslaan</button>
 </form>
 
 <style>
@@ -56,4 +54,19 @@ import { createEventDispatcher } from 'svelte';
     .field-success {
         border-color: green;
     }
+
+    .btn {
+		background-color: #5E44CA;
+		color: white;
+		padding: 0.5rem 1.2rem;
+		border-radius: 15px ;
+		text-decoration: none;
+	}
+
+    input[type="text"]{
+      border-radius:15px;
+      -moz-border-radius:15px;
+      -webkit-border-radius:15px;
+    }
+
 </style>
