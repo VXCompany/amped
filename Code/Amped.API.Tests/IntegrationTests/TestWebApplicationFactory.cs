@@ -17,7 +17,7 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
         builder.ConfigureServices(services =>
         {
             services
-                .Where(d => d.ServiceType.Namespace.Contains("MassTransit", StringComparison.OrdinalIgnoreCase))
+                .Where(d => d.ServiceType.Namespace != null && d.ServiceType.Namespace.Contains("MassTransit", StringComparison.OrdinalIgnoreCase))
                 .ToList()
                 .ForEach(d => services.Remove(d));
                 
