@@ -1,8 +1,4 @@
-param rabbitUsername string
 param location string = resourceGroup().location
-
-@secure()
-param rabbitPassword string
 
 module log 'log.bicep' = {
     name: 'log-analytics-workspace'
@@ -17,16 +13,5 @@ module cae 'cae.bicep' = {
     location: location
     logClientId:log.outputs.clientId
     logClientSecret: log.outputs.clientSecret
-  }
-}
-
-module rabbitmq 'ca-rabbitmq.bicep' = {
-  name: 'rabbitmq'
-  params: {
-    location: location
-    containerAppEnvironmentId: cae.outputs.id
-    containerImage: 'docker.io/rabbitmq:3-management-alpine'
-    rabbitUsername: rabbitUsername
-    rabbitPassword: rabbitPassword
   }
 }

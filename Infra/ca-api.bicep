@@ -1,12 +1,12 @@
 param containerAppEnvironmentId string
-param containerImage string
+param containerImageApi string
+param containerImageRabbit string
 param useExternalIngress bool = false
 param containerPort int
 param registry string
 param registryUsername string
 param location string
 param rabbitUsername string
-param rabbitHost string
 
 @secure()
 param registryPassword string
@@ -14,10 +14,11 @@ param registryPassword string
 @secure()
 param rabbitPassword string
 
-var name = 'ca-amped-api-westeu-001'
+var nameApi = 'ca-amped-api-westeu-001'
+var nameRabbit = 'ca-amped-rabbit-westeu-001'
 
 resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
-  name: name
+  name: nameApi
   kind: 'containerapp'
   location: location
   properties: {
@@ -53,8 +54,8 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
     template: {
       containers: [
         {
-            image: containerImage
-            name: name
+            image: containerImageApi
+            name: nameApi
             env: [
               {
                 name: 'ASPNETCORE_ENVIRONMENT'
@@ -66,7 +67,7 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
               }
               {
                 name: 'RABBITMQ_HOST'
-                value: rabbitHost
+                value: 'localhost'
               }
               {
                 name: 'RABBITMQ_PORT'
@@ -80,6 +81,24 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
                 name: 'RABBITMQ_PASSWORD'
                 secretRef: 'rabbitmq-user'  
               }
+          ]
+          resources: {
+            cpu: 1
+            memory: '2Gi'
+          }
+        } 
+        {
+          image: containerImageRabbit
+          name: nameRabbit
+          env: [
+            {
+              name: 'RABBITMQ_DEFAULT_USER'
+              secretRef: 'rabbitmq-user'  
+            }
+            {
+              name: 'RABBITMQ_DEFAULT_PASS'
+              secretRef: 'rabbitmq-password'  
+            }
           ]
           resources: {
             cpu: 1

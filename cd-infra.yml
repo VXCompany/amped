@@ -53,5 +53,4 @@ stages:
               inlineScript: |
                 az deployment group create  `
                 --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
-                --resource-group 'totallyamped.tech' `
-                --parameters rabbitUsername=$env:RABBITMQ_DEFAULT_USER rabbitPassword=$env:MY_RABBITMQ_DEFAULT_PASS
+                --resource-group 'totallyamped.tech'
