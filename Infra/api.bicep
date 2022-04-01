@@ -1,4 +1,5 @@
-param containerImage string
+param containerImageApi string
+param containerImageRabbit string
 param containerPort int
 param registry string
 param registryUsername string
@@ -15,20 +16,16 @@ resource cae 'Microsoft.Web/kubeEnvironments@2021-02-01' existing = {
   name: 'cae-amped-westeu-001'
 }
 
-resource rabbitmq 'Microsoft.Web/containerApps@2021-03-01' existing = {
-  name: 'ca-amped-rabbitmq-westeu-001'
-}
-
 module api 'ca-api.bicep' = {
   name: 'ampedapi'
   params: {
     location: location
     containerAppEnvironmentId: cae.id
-    containerImage: containerImage
+    containerImageApi: containerImageApi
+    containerImageRabbit: containerImageRabbit
     containerPort: containerPort
     rabbitUsername: rabbitUsername
     rabbitPassword: rabbitPassword
-    rabbitHost: rabbitmq.properties.configuration.ingress.fqdn
     useExternalIngress: true
     registry: registry
     registryUsername: registryUsername
