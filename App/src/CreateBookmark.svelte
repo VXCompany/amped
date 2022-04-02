@@ -63,6 +63,7 @@ import { createEventDispatcher } from 'svelte';
         border-bottom-left-radius: 15px;
         border: solid 2px #94A3B8;
         flex-grow: 1;
+        min-width: 0;
     }
 
     .field-danger {
@@ -82,5 +83,20 @@ import { createEventDispatcher } from 'svelte';
         border: none;
         cursor: pointer;
     }
+
+    @media screen and (max-width: 767px) {
+		.container {
+			flex-wrap: wrap;
+		}
+        input {
+            border-radius: 15px;
+        }
+		#add-btn {
+			order: 3;
+			flex: 100%;
+			margin-top: 1rem;
+            border-radius: 15px;
+		}
+	}
 
 </style>
