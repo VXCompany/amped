@@ -1,10 +1,10 @@
-trigger: none
-#  branches:
-#    include:
-#      - main
-#  paths:
-#    include:
-#    - App/*
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+    - App/*
 
 pr: none
 
