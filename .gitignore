@@ -361,3 +361,6 @@ MigrationBackup/
 /Code/Amped.API/amped.db
 
 
+App/public/build/bundle.css
+App/public/build/bundle.js
+App/public/build/bundle.js.map

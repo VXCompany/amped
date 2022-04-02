@@ -43,11 +43,6 @@ import CreateBookmark from './CreateBookmark.svelte';
 		box-sizing: border-box;
 	}
 
-	:global(body) {
-		background-color: #F1F5F9;
-		min-width: 320px;
-	}
-
 	header {
 		background-color: white;
 		border-radius: 15px;
