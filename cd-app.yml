@@ -13,7 +13,7 @@ pool:
 
 stages:
 
-- stage: Build
+- stage: Build & Deploy
   jobs:
   - job: Build
     steps:
@@ -32,6 +32,7 @@ stages:
         workingDir: 'App'
         customCommand: 'run build'
     - task: AzureStaticWebApp@0
+      displayName: Deploy
       inputs:
         app_location: 'App/public'
         skip_app_build: true
