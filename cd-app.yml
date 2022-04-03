@@ -34,8 +34,8 @@ stages:
 
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.DefaultWorkingDirectory)'
-        ArtifactName: 'app'
+        PathtoPublish: '$(System.DefaultWorkingDirectory)'
+        ArtifactName: App
         publishLocation: 'Container'
 
 - stage: DeployTest
@@ -47,7 +47,12 @@ stages:
         runOnce:
           deploy:
             steps:
-
+            - checkout: none #skip checking out the default repository resource
+            - task: DownloadBuildArtifacts@0
+              displayName: 'Download Build Artifacts'
+              inputs:
+                artifactName: App
+                downloadPath: $(System.DefaultWorkingDirectory)
             - task: AzureStaticWebApp@0
               displayName: Deploy
               inputs:
