@@ -56,7 +56,7 @@ stages:
             - task: AzureStaticWebApp@0
               displayName: Deploy
               inputs:
-                app_location: '/'
+                app_location: '/App'
                 skip_app_build: true
                 azure_static_web_apps_api_token: '$(DEPLOYMENT_TOKEN)'
   dependsOn: Build
