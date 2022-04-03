@@ -60,6 +60,8 @@ stages:
                   rabbitUsername=$env:RABBITMQ_USER rabbitPassword=$env:MY_RABBITMQ_PASS `
                   containerPort=80 registry=amped.azurecr.io `
                   registryUsername=$env:REGISTRY_USER registryPassword=$env:MY_REGISTRY_PASS containerImageRabbit=docker.io/rabbitmq:3-management-alpine
+  dependsOn: Build
+  condition: succeeded()
                   
 - stage: Test
   jobs:
