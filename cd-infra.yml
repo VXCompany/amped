@@ -54,3 +54,5 @@ stages:
                 az deployment group create  `
                 --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
                 --resource-group 'totallyamped.tech'
+  dependsOn: Build
+  condition: succeeded()
