@@ -13,7 +13,7 @@ pool:
 
 stages:
 
-- stage: Build & Deploy
+- stage: Build
   jobs:
   - job: Build
     steps:
@@ -31,10 +31,28 @@ stages:
         command: 'custom'
         workingDir: 'App'
         customCommand: 'run build'
-    - task: AzureStaticWebApp@0
-      displayName: Deploy
-      inputs:
-        app_location: 'App/public'
-        skip_app_build: true
-        azure_static_web_apps_api_token: '$(DEPLOYMENT_TOKEN)'
 
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.DefaultWorkingDirectory)/App'
+        ArtifactName: 'app'
+        publishLocation: 'Container'
+
+- stage: DeployTest
+  jobs:
+    - deployment: AppToAzure
+      displayName: 'Deploy to Azure'
+      environment: 'AzureTest'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+
+            - task: AzureStaticWebApp@0
+              displayName: Deploy
+              inputs:
+                app_location: 'public'
+                skip_app_build: true
+                azure_static_web_apps_api_token: '$(DEPLOYMENT_TOKEN)'
+  dependsOn: Build
+  condition: succeeded()
