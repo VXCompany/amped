@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 
 import {render} from '@testing-library/svelte'
 
-import Comp from './App'
+import Comp from '../App'
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
