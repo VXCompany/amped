@@ -51,6 +51,10 @@ jobs:
         args: >
           -Dsonar.organization=vxcompany-github
           -Dsonar.projectKey=VXCompany_amped_app
+          -Dsonar.sources=src 
+          -Dsonar.tests=src
+          -Dsonar.test.inclusions=**/__test__/**
+          -Dsonar.exclusions=**/__test__/**
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
