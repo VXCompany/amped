@@ -4,4 +4,7 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
   },
   moduleFileExtensions: ['js', 'svelte'],
+  'globals': {
+    'AMPED_API_URL': 'http://localhost:5001/api'
+  }
 }
