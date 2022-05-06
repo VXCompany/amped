@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Amped.API;
 
@@ -36,7 +37,24 @@ public class Startup
         ConfigureMassTransit(services);
 
         services.AddSignalRCore();
-        
+
+        services.AddBff();
+        services.AddAuthentication(options =>
+        {
+            options.DefaultScheme = "cookie";
+            options.DefaultChallengeScheme = "oidc";
+            options.DefaultSignOutScheme = "oidc";
+        }).AddCookie("cookie", options =>
+        {
+            options.Cookie.Name = "__Host-bff";
+            options.Cookie.SameSite = SameSiteMode.Strict;
+        }).AddGitHub("oidc", googleOptions =>
+        {
+            googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+            googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+        });
+
+
     }
 
     private void ConfigureMassTransit(IServiceCollection services)
@@ -80,7 +98,17 @@ public class Startup
         }
 
         app.UseRouting();
+        app.UseAuthentication();
+        app.UseBff();
         app.UseAuthorization();
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        app.UseEndpoints(endpoints => 
+        {
+            endpoints.MapBffManagementEndpoints();
+
+            endpoints
+            .MapControllers()
+            .RequireAuthorization()
+            .AsBffApiEndpoint(); 
+        });
     }
 }
