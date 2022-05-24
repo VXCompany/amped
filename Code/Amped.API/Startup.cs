@@ -53,8 +53,6 @@ public class Startup
             googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
             googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
         });
-
-
     }
 
     private void ConfigureMassTransit(IServiceCollection services)
@@ -108,7 +106,12 @@ public class Startup
             endpoints
             .MapControllers()
             .RequireAuthorization()
-            .AsBffApiEndpoint(); 
+            .AsBffApiEndpoint();
+        });
+
+        app.UseSpa(config =>
+        {
+            config.UseProxyToSpaDevelopmentServer("http://host.docker.internal:8080");
         });
     }
 }
