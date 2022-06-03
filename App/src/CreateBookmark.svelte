@@ -27,7 +27,7 @@ import { createEventDispatcher } from 'svelte';
 
 </script>
 
-<form on:submit|preventDefault={createBookmark}>
+<form aria-label="form" on:submit|preventDefault={createBookmark}>
     <div class="wrapper">
         <div class="container">
             <input 
