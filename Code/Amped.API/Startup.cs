@@ -1,5 +1,6 @@
 using Amped.Core;
 using Amped.Core.NewBookmark;
+using Amped.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -60,7 +61,6 @@ public class Startup
                 cfg.ConfigureEndpoints(context);
             });
         });
-        services.AddMassTransitHostedService();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

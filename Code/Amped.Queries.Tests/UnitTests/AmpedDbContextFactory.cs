@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Common;
 using Amped.Core;
+using Amped.Infrastructure;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace Amped.Queries.Tests.UnitTests;
 
 public class AmpedDbContextFactory : IDisposable
 {
-    private DbConnection _connection;
+    private DbConnection? _connection;
     
     private DbContextOptions<AmpedDbContext> CreateOptions()
     {
