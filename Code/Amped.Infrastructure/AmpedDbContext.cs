@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Amped.Core;
+using Microsoft.EntityFrameworkCore;
 
-namespace Amped.Core;
+namespace Amped.Infrastructure;
 
 public class AmpedDbContext : DbContext
 {

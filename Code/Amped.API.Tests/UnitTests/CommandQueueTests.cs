@@ -21,6 +21,6 @@ public class CommandQueueTests
 
     public class TestMessage
     {
-        public string Foo { get; set; }
+        public string Foo { get; set; } = "bar";
     }
 }

@@ -1,4 +1,5 @@
 using Amped.Core;
+using Amped.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amped.Queries;

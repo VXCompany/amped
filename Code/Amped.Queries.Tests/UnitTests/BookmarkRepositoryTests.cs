@@ -11,6 +11,7 @@ public class BookmarkRepositoryTests
     public async Task Returns_Bookmarks()
     {
         using var factory = new AmpedDbContextFactory();
+        
         await using (var context = factory.CreateContext())
         {
             var bookmark = Core.Bookmark.CreateUnreadBookmark(new Uri("https://totallyamped.com/why-amped-rulez"), "00000000-0000-0000-0000-000000000001");

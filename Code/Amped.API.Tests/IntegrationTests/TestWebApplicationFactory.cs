@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Amped.Core;
 using Amped.Core.NewBookmark;
+using Amped.Infrastructure;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -27,7 +28,6 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
                 
                 x.UsingInMemory((context, cfg) =>
                 {
-                    cfg.TransportConcurrencyLimit = 100;
                     cfg.ConfigureEndpoints(context);
                 });
             });

@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using MassTransit;
 
 namespace Amped.Core.NewBookmark;

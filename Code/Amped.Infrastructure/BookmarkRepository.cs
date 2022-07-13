@@ -1,4 +1,6 @@
-namespace Amped.Core;
+using Amped.Core;
+
+namespace Amped.Infrastructure;
 
 public class BookmarkRepository : IBookmarkRepository
 {
