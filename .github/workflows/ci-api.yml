@@ -61,7 +61,7 @@ jobs:
           dotnet build --configuration Release --no-restore Amped.Bookmarks.sln
       - name: Test
         working-directory: './Bookmarks/Api'
-        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ Amped.sln
+        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ Amped.Bookmarks.sln
       - name: Analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
