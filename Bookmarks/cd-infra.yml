@@ -1,10 +1,10 @@
-trigger: 
+trigger:
  branches:
    include:
      - main
  paths:
    include:
-   - Infra/*
+   - Bookmarks/Infra/*
 
 pr: none
 
@@ -28,7 +28,7 @@ stages:
     - task: PublishBuildArtifacts@1
       displayName: 'Publish infra'
       inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/Infra/main.json'
+        PathtoPublish: '$(Build.SourcesDirectory)/Bookmarks/Infra/main.json'
         ArtifactName: 'infra'
         publishLocation: 'Container'
 
@@ -47,12 +47,12 @@ stages:
             env:
               MY_RABBITMQ_DEFAULT_PASS: $(RABBITMQ_DEFAULT_PASS)
             inputs:
-              azureSubscription: 'Azure MPN - yuriburger' 
+              azureSubscription: 'Azure MPN - yuriburger'
               scriptType: 'pscore'
               scriptLocation: 'inlineScript'
               inlineScript: |
                 az deployment group create  `
-                --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
+                --template-file $(Build.SourcesDirectory)/Bookmarks/Infra/main.bicep `
                 --resource-group 'totallyamped.tech'
   dependsOn: Build
   condition: succeeded()

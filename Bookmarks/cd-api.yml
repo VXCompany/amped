@@ -1,10 +1,10 @@
-trigger: 
+trigger:
   branches:
     include:
       - main
   paths:
     include:
-    - Code/*
+    - Bookmarks/Api/*
 
 pr: none
 
@@ -21,18 +21,18 @@ stages:
 - stage: Build
   jobs:
   - job: Build
-    steps: 
+    steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         containerRegistry: 'Azure ACR - yuriburger'
         repository: 'ampedapi'
         command: 'buildAndPush'
-        Dockerfile: './Code/Amped.API/Dockerfile'
-        buildContext: './Code'
+        Dockerfile: './Bookmarks/Api/Amped.API/Dockerfile'
+        buildContext: './Bookmarks/Api'
         tags: '$(Build.BuildId)'
 
-  
+
 - stage: DeployTest
   jobs:
     - deployment: APIToAzure
@@ -54,7 +54,7 @@ stages:
                 scriptLocation: 'inlineScript'
                 inlineScript: |
                   az deployment group create  `
-                  --template-file $(Build.SourcesDirectory)/Infra/api.bicep `
+                  --template-file $(Build.SourcesDirectory)/Bookmarks/Infra/api.bicep `
                   --resource-group 'totallyamped.tech' `
                   --parameters containerImageApi=amped.azurecr.io/ampedapi:$(Build.BuildId) `
                   rabbitUsername=$env:RABBITMQ_USER rabbitPassword=$env:MY_RABBITMQ_PASS `
@@ -62,7 +62,7 @@ stages:
                   registryUsername=$env:REGISTRY_USER registryPassword=$env:MY_REGISTRY_PASS containerImageRabbit=docker.io/rabbitmq:3-management-alpine
   dependsOn: Build
   condition: succeeded()
-                  
+
 - stage: Test
   jobs:
   - job: ZAP
