@@ -1,0 +1,9 @@
+input {
+  outline: none;
+  border-width: 2px;
+  padding: 0.8rem 1.1rem;
+  border-radius: 25px;
+  border: solid 2px #94A3B8;
+  flex-grow: 1;
+  min-width: 0;
+}
