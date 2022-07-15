@@ -29,7 +29,7 @@ stages:
         repository: 'ampedapi'
         command: 'buildAndPush'
         Dockerfile: './Bookmarks/Api/Amped.API/Dockerfile'
-        buildContext: './ookmarks/Api'
+        buildContext: './Bookmarks/Api'
         tags: '$(Build.BuildId)'
 
 
