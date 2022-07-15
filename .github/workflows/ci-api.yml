@@ -9,11 +9,11 @@ on:
   push:
     branches: [ main ]
     paths:
-    - '/Bookmarks/Api/**'
+    - /Bookmarks/Api/**
   pull_request:
     branches: [ main ]
     paths:
-    - '/Bookmarks/Api/**'
+    - /Bookmarks/Api/**
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -49,7 +49,7 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
       - name: Install dependencies
         working-directory: './Bookmarks/Api'
-        run: dotnet restore Amped.sln
+        run: dotnet restore Amped.Bookmarks.sln
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -57,11 +57,11 @@ jobs:
         shell: sh
         working-directory: './Bookmarks/Api'
         run: |
-          ../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
-          dotnet build --configuration Release --no-restore Amped.sln
+          ../../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+          dotnet build --configuration Release --no-restore Amped.Bookmarks.sln
       - name: Test
         working-directory: './Bookmarks/Api'
-        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ Amped.sln
+        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ Amped.Bookmarks.sln
       - name: Analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -69,4 +69,4 @@ jobs:
         shell: sh
         working-directory: './Bookmarks/Api'
         run: |
-          ../.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          ../../.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

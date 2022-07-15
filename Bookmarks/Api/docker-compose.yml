@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY-}ampedapi
     build:
       context: .
-      dockerfile: Amped.API/Dockerfile
+      dockerfile: Amped.Bookmarks.API/Dockerfile
     environment:
         RABBITMQ_HOST: rabbitmq
         RABBITMQ_PORT: 5672
@@ -16,7 +16,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: "rabbitmq"
-    environment:        
+    environment:
         RABBITMQ_DEFAULT_USER: user
         RABBITMQ_DEFAULT_PASS: PASSWORD
     ports:

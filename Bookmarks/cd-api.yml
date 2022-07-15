@@ -28,7 +28,7 @@ stages:
         containerRegistry: 'Azure ACR - yuriburger'
         repository: 'ampedapi'
         command: 'buildAndPush'
-        Dockerfile: './Bookmarks/Api/Amped.API/Dockerfile'
+        Dockerfile: './Bookmarks/Api/Amped.Bookmarks.API/Dockerfile'
         buildContext: './Bookmarks/Api'
         tags: '$(Build.BuildId)'
 

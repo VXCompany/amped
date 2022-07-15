@@ -6,7 +6,7 @@
     <ProjectGuid>7d74488b-41ed-4ff1-b523-fb1ac85794cf</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>amped.api</DockerServiceName>
+    <DockerServiceName>amped.bookmarks.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
