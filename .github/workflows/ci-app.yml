@@ -47,7 +47,7 @@ jobs:
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
-        projectBaseDir: './App'
+        projectBaseDir: './Bookmarks/App'
         args: >
           -Dsonar.organization=vxcompany-github
           -Dsonar.projectKey=VXCompany_amped_app
