@@ -24,7 +24,6 @@ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up
 
 ### Jetbrains Rider
 For Jetbrains Rider we have the following Run/Debug configuration stored with the source code.
-![run debug configuration](C:\Users\yurib\source\repos\amped\Code\rundebug.png "run debug configuration")
 
 ### Visual Studio
 For Visual Studio we can set the Docker Compose as the default startup project. No further launch configuration required.
