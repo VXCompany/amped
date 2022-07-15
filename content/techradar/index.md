@@ -16,6 +16,9 @@ Things that were a bit rough with Svelte:
 
 - We were not sure if we needed SvelteKit so we started with plain Svelte. Maybe we will need to move to SvelteKit later on.
 
+### Status
+???
+
 ## Mass Transit
 
 TBD
