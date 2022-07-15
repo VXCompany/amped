@@ -69,4 +69,4 @@ jobs:
         shell: sh
         working-directory: './Bookmarks/Api'
         run: |
-          ../.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          ../../.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
