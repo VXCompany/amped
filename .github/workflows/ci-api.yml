@@ -58,7 +58,7 @@ jobs:
         working-directory: './Bookmarks/Api'
         run: |
           ../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
-          dotnet build --configuration Release --no-restore Amped.sln
+          dotnet build --configuration Release --no-restore Amped.Bookmarks.sln
       - name: Test
         working-directory: './Bookmarks/Api'
         run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ Amped.sln
