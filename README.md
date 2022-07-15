@@ -30,6 +30,7 @@ This project started as input for our meetup content and a nice demo app (no mor
 | [Mob programming session #2](./content/mobs/mob2.md)                                          | Clean up, more tests and architecture |
 | [Twitch Live programming session #1](./content/mobs/live1.md)                                 | Building a UI with Svelte part 1          |
 | [Twitch Live programming session #2](./content/mobs/live2.md)                                 | Building a UI with Svelte part 2          |
+| [The Amped Tech Radar](./content/techradar/index.md) | List of tech, frameworks, etc. |
 
 
 We also do live broadcasts on Twitch. You can check our streams there:
