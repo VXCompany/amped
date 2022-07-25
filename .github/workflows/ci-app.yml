@@ -9,22 +9,22 @@ on:
   push:
     branches: [ main ]
     paths:
-    - 'App/**'
+    - Bookmarks/App/**
   pull_request:
     branches: [ main ]
     paths:
-    - 'App/**'
+    - Bookmarks/App/**
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   build:
-    
+
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: './App'
+        working-directory: './Bookmarks/App'
     strategy:
       matrix:
         node-version: [16.x]
@@ -47,11 +47,11 @@ jobs:
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
-        projectBaseDir: './App'
+        projectBaseDir: './Bookmarks/App'
         args: >
           -Dsonar.organization=vxcompany-github
           -Dsonar.projectKey=VXCompany_amped_app
-          -Dsonar.sources=src 
+          -Dsonar.sources=src
           -Dsonar.tests=src
           -Dsonar.test.inclusions=**/__tests__/**
           -Dsonar.exclusions=**/__tests__/**
