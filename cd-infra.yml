@@ -53,6 +53,6 @@ stages:
               inlineScript: |
                 az deployment group create  `
                 --template-file $(Build.SourcesDirectory)/Infra/main.bicep `
-                --resource-group 'totallyamped.tech'
+                --resource-group 'rg-amped-prod-westeu-001'
   dependsOn: Build
   condition: succeeded()
