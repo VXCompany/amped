@@ -15,7 +15,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2022-05-02-preview' = {
     enableRBAC: true
     agentPoolProfiles: [
       {
-        name: '${name}ap1'
+        name: 'ampedap1'
         count: nodeCount
         vmSize: vmSize
         mode: 'System'
