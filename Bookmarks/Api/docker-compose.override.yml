@@ -7,5 +7,3 @@ services:
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "5001:80"
-    volumes:
-      - ~/.aspnet/https:/https:ro
