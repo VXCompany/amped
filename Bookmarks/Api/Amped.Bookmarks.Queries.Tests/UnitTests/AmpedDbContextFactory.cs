@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Common;
 using Amped.Bookmarks.Infrastructure;
-using Amped.Infrastructure;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,16 +19,18 @@ public class AmpedDbContextFactory : IDisposable
 
     public AmpedDbContext CreateContext()
     {
-        if (_connection == null)
+        if (_connection != null)
         {
-            _connection = new SqliteConnection("DataSource=:memory:");
-            _connection.Open();
+            return new AmpedDbContext(CreateOptions());
+        }
+        
+        _connection = new SqliteConnection("DataSource=:memory:");
+        _connection.Open();
 
-            var options = CreateOptions();
-            using (var context = new AmpedDbContext(options))
-            {
-                context.Database.EnsureCreated();
-            }
+        var options = CreateOptions();
+        using (var context = new AmpedDbContext(options))
+        {
+            context.Database.EnsureCreated();
         }
 
         return new AmpedDbContext(CreateOptions());

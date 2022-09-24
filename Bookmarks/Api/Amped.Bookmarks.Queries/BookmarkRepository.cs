@@ -1,5 +1,4 @@
 using Amped.Bookmarks.Infrastructure;
-using Amped.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amped.Bookmarks.Queries;

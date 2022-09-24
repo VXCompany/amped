@@ -28,19 +28,44 @@ public class Startup
         services.AddTransient<ICommandQueue, CommandQueue>();
         services.AddTransient<IEventStream, EventStream>();
         services.AddTransient<Queries.IBookmarkRepository, Queries.BookmarkRepository>(); // yuck...
-
-        services.AddSqlite<AmpedDbContext>("Data Source=amped.db");
-
+        
         services.AddControllers();
         services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Amped.Bookmarks.API", Version = "v1"}); });
 
         ConfigureMassTransit(services);
+        ConfigureCosmos(services);
 
         services.AddSignalRCore();
         
     }
+    
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AmpedDbContext db)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Amped.Bookmarks.API v1"));
+            app.UseCors(b => b
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod());
+        }
 
-    private void ConfigureMassTransit(IServiceCollection services)
+        app.UseRouting();
+        app.UseAuthorization();
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+    }
+
+    protected virtual void ConfigureCosmos(IServiceCollection services)
+    {
+        var connectionString = Configuration["connectionStrings:bookmarks"];
+        
+        services.AddCosmos<AmpedDbContext>(connectionString, "bookmarks");
+    }
+
+    protected virtual void ConfigureMassTransit(IServiceCollection services)
     {
         var rabbitMqHost = Configuration.GetValue<string>("RABBITMQ_HOST");
         var rabbitMqPort = Configuration.GetValue<ushort>("RABBITMQ_PORT");
@@ -63,24 +88,4 @@ public class Startup
         });
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AmpedDbContext db)
-    {
-        db.Database.Migrate();
-
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Amped.Bookmarks.API v1"));
-            app.UseCors(b => b
-                .AllowAnyHeader()
-                .AllowAnyOrigin()
-                .AllowAnyMethod());
-        }
-
-        app.UseRouting();
-        app.UseAuthorization();
-        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-    }
 }
