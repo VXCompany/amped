@@ -1,47 +1,16 @@
 ﻿using System;
-using System.Data.Common;
 using Amped.Bookmarks.Infrastructure;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amped.Bookmarks.Queries.Tests.UnitTests;
 
-public class AmpedDbContextFactory : IDisposable
+public static class AmpedDbContextFactory
 {
-    private DbConnection? _connection;
-    
-    private DbContextOptions<AmpedDbContext> CreateOptions()
-    {
-        return new DbContextOptionsBuilder<AmpedDbContext>()
-            .UseSqlite(_connection)
+    private static DbContextOptions<AmpedDbContext> CreateOptions(string dbName) =>
+        new DbContextOptionsBuilder<AmpedDbContext>()
+            .UseInMemoryDatabase(dbName)
             .Options;
-    }
 
-    public AmpedDbContext CreateContext()
-    {
-        if (_connection != null)
-        {
-            return new AmpedDbContext(CreateOptions());
-        }
-        
-        _connection = new SqliteConnection("DataSource=:memory:");
-        _connection.Open();
+    public static AmpedDbContext CreateContext(string dbName) => new (CreateOptions(dbName));
 
-        var options = CreateOptions();
-        using (var context = new AmpedDbContext(options))
-        {
-            context.Database.EnsureCreated();
-        }
-
-        return new AmpedDbContext(CreateOptions());
-    }
-
-    public void Dispose()
-    {
-        if (_connection != null)
-        {
-            _connection.Dispose();
-            _connection = null;
-        }
-    }
 }

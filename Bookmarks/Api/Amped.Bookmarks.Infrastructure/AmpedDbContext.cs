@@ -13,12 +13,13 @@ public class AmpedDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Bookmark>(b =>
+        modelBuilder.Entity<Bookmark>(entity =>
         {
-            b.ToContainer("Bookmarks");
-            b.Property(b => b.Id).ToJsonProperty("id");
-            b.HasPartitionKey(b => b.Owner);
-            b.HasKey(b => new {b.Owner, b.Id});
+            entity.ToContainer("Bookmarks");
+            entity.Property(b => b.Id).ToJsonProperty("id");
+            entity.HasPartitionKey(b => b.Owner);
+            
+            entity.HasKey(b => new {b.Owner, b.Id});
         });
     }
 }
