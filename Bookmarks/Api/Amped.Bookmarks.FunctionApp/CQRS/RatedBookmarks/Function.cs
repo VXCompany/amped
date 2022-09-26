@@ -9,10 +9,10 @@ public static class Function
 {
     [FunctionName("ReadModel")]
     public static async Task Run(
-            [CosmosDBTrigger("Bookmarks", "Bookmarks", ConnectionStringSetting = "connectionString", CreateLeaseCollectionIfNotExists = true)]
+            [CosmosDBTrigger("bookmarks", "bookmarks", ConnectionStringSetting = "connectionString", CreateLeaseCollectionIfNotExists = true)]
             IEnumerable<dynamic> input, 
             
-            [CosmosDB("Bookmarks", "mv_RatedBookmarks", ConnectionStringSetting = "connectionString")]
+            [CosmosDB("bookmarks", "mv_ratedbookmarks", ConnectionStringSetting = "connectionString")]
             IAsyncCollector<RatedBookmark> ratedBookmarks
         )
     {

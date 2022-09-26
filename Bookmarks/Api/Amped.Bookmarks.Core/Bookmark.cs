@@ -1,6 +1,4 @@
-﻿using MassTransit.Futures.Contracts;
-
-namespace Amped.Bookmarks.Core;
+﻿namespace Amped.Bookmarks.Core;
 
 public class Bookmark
 {
@@ -16,7 +14,7 @@ public class Bookmark
         Uri = uri ?? throw new ArgumentNullException();
         Owner = owner;
         Read = read;
-        Id = new Guid();
+        Id = Guid.NewGuid();
     }
 
     private Bookmark()

@@ -60,7 +60,6 @@ public class Startup
     protected virtual void ConfigureCosmos(IServiceCollection services)
     {
         var connectionString = Configuration["ConnectionStrings:bookmarks"];
-        
         services.AddCosmos<AmpedDbContext>(connectionString, "bookmarks");
     }
 
