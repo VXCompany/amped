@@ -1,5 +1,4 @@
 using Amped.Bookmarks.Infrastructure;
-using Amped.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amped.Bookmarks.Queries;
@@ -23,6 +22,7 @@ public class BookmarkRepository : IBookmarkRepository
         return await _db.Bookmarks
             .Select(b => new Bookmark
             {
+                Id = b.Id,
                 Uri = b.Uri,
                 Owner = Guid.Parse(b.Owner),
                 Read = b.Read

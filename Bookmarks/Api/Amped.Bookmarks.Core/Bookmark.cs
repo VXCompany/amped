@@ -2,6 +2,7 @@
 
 public class Bookmark
 {
+    public Guid Id { get; }
     public Uri Uri { get; }
     public bool Read { get; private set; }
     public string Owner { get; }
@@ -13,6 +14,7 @@ public class Bookmark
         Uri = uri ?? throw new ArgumentNullException();
         Owner = owner;
         Read = read;
+        Id = Guid.NewGuid();
     }
 
     private Bookmark()

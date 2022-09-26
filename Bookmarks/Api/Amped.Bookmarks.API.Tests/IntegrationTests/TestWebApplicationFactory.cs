@@ -5,6 +5,7 @@ using Amped.Bookmarks.Infrastructure;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Amped.Bookmarks.API.Tests.IntegrationTests;
@@ -12,8 +13,7 @@ namespace Amped.Bookmarks.API.Tests.IntegrationTests;
 public class TestWebApplicationFactory : WebApplicationFactory<Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
-    {
-            
+    {   
         builder.ConfigureServices(services =>
         {
             services
@@ -31,14 +31,15 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
                 });
             });
 
-            var dbContextDescriptor = services.First(d => d.ServiceType == typeof(AmpedDbContext));
-            services.Remove(dbContextDescriptor);
+            services
+                .Where(d => d.ServiceType.Namespace != null && d.ServiceType.Namespace.Contains("entity", StringComparison.OrdinalIgnoreCase))
+                .ToList()
+                .ForEach(d => services.Remove(d));
 
-            services.AddSqlite<AmpedDbContext>(":memory:");
-
-            var sp = services.BuildServiceProvider();
-            using var scope = sp.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<AmpedDbContext>();
+            services.AddDbContext<AmpedDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("InMemoryDB");
+            });
         });
     }
 }

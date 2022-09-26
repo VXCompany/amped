@@ -4,7 +4,7 @@ namespace Amped.Bookmarks.Queries;
 
 public class Bookmark
 {
-    // public int Id { get; set; }
+    public Guid Id { get; set; }
         
     public Uri Uri { get; set; }
         
