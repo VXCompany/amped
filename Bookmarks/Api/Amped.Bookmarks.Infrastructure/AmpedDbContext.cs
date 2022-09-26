@@ -17,6 +17,7 @@ public class AmpedDbContext : DbContext
         {
             entity.ToContainer("Bookmarks");
             entity.Property(b => b.Id).ToJsonProperty("id");
+            entity.Property(b => b.Owner).ToJsonProperty("owner");
             entity.HasPartitionKey(b => b.Owner);
             
             entity.HasKey(b => new {b.Owner, b.Id});
