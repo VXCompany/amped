@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amped.Bookmarks.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amped.Bookmarks.FunctionApp", "Amped.Bookmarks.FunctionApp\Amped.Bookmarks.FunctionApp.csproj", "{446B1C41-0B9C-483A-8960-21FACB418EFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amped.Bookmarks.FunctionApp.Tests", "Amped.Bookmarks.FunctionApp.Tests\Amped.Bookmarks.FunctionApp.Tests.csproj", "{C8D5E398-CAAF-429F-850F-FA52041D0305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{446B1C41-0B9C-483A-8960-21FACB418EFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{446B1C41-0B9C-483A-8960-21FACB418EFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{446B1C41-0B9C-483A-8960-21FACB418EFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D5E398-CAAF-429F-850F-FA52041D0305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D5E398-CAAF-429F-850F-FA52041D0305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D5E398-CAAF-429F-850F-FA52041D0305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D5E398-CAAF-429F-850F-FA52041D0305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

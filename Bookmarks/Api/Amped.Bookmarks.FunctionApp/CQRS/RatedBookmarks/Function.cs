@@ -13,13 +13,13 @@ public static class Function
             IEnumerable<dynamic> input, 
             
             [CosmosDB("Bookmarks", "mv_RatedBookmarks", ConnectionStringSetting = "connectionString")]
-            IAsyncCollector<RatedBookmark> toDoItemsOut
+            IAsyncCollector<RatedBookmark> ratedBookmarks
         )
     {
-        var ratedBookmarks = input.Select(x => new RatedBookmark(x.uri, x.owner, 0));
-        foreach (var ratedBookmark in ratedBookmarks)
+        var mappedRatedBookmarks = input.Select(x => new RatedBookmark(x.uri, x.owner, 0));
+        foreach (var ratedBookmark in mappedRatedBookmarks)
         {
-            await toDoItemsOut.AddAsync(ratedBookmark);
+            await ratedBookmarks.AddAsync(ratedBookmark);
         }
     }
 }
