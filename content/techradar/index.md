@@ -23,6 +23,30 @@ Status:
 
 TBD
 
+## Azure CosmosDB
+
+TBD
+
+## Azure Functions
+
+TBD
+
+## Azure Static Web App
+
+TBD
+
+## Azure Container Apps
+
+TBD
+
+## RabbitMQ
+
+TBD
+
+## ASP.NET Minimal API
+
+TBD
+
 ## Sonar Cloud
 
 TBD
