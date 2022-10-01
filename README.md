@@ -8,7 +8,7 @@
 
 Amped's main goal is to help with access to curated content. Users are encouraged to contribute, consume and rate all kinds of content: (e)books, blogposts, links, videos, courses, etc.
 
-![The Amped icon](amped-icon-128.png)
+![The Amped icon](amped-icon-256.png)
 
 ### What does it do?
 
@@ -28,9 +28,9 @@ This project started as input for our meetup content and a nice demo app (no mor
 | [IaC Design ](./content/designs/2_infra_as_code/infra_as_code.md)                             | A first proposal on IaC for Amped     |
 | [Mob programming session](./content/mobs/mob.md)                                              | Modelling the domain                  |
 | [Mob programming session #2](./content/mobs/mob2.md)                                          | Clean up, more tests and architecture |
-| [Twitch Live programming session #1](./content/mobs/live1.md)                                 | Building a UI with Svelte part 1          |
-| [Twitch Live programming session #2](./content/mobs/live2.md)                                 | Building a UI with Svelte part 2          |
-| [The Amped Tech Radar](./content/techradar/index.md) | List of tech, frameworks, etc. |
+| [Twitch Live programming session #1](./content/mobs/live1.md)                                 | Building a UI with Svelte part 1      |
+| [Twitch Live programming session #2](./content/mobs/live2.md)                                 | Building a UI with Svelte part 2      |
+| [The Amped Tech Radar](./content/techradar/index.md)                                          | List of tech, frameworks, etc.        |
 
 
 We also do live broadcasts on Twitch. You can check our streams there:
