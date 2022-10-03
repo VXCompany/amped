@@ -16,14 +16,7 @@ The video covers the entire session (1 hour 10 minutes), but you can jump to the
 
 Links to the info mentioned in this session:
 
-Define resources with Bicep, ARM templates, and Terraform AzAPI provider
-https://learn.microsoft.com/en-us/azure/templates/
-
-Define your naming convention
-https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming
-
-Azure Static Web Apps documentation
-https://learn.microsoft.com/en-us/azure/static-web-apps/
-
-Create a service connection from Azure DevOps to Azure
-https://learn.microsoft.com/en-us/azure/devops/pipelines/library/connect-to-azure?view=azure-devops
+- [Define resources with Bicep, ARM templates, and Terraform AzAPI provider](https://learn.microsoft.com/en-us/azure/templates/)
+- [Define your naming convention](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
+- [Azure Static Web Apps documentation](https://learn.microsoft.com/en-us/azure/static-web-apps/)
+- [reate a service connection from Azure DevOps to Azure](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/connect-to-azure?view=azure-devops)
