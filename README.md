@@ -40,7 +40,7 @@ We also do live broadcasts on Twitch. You can check our streams there:
 
 ### Open Source
 
-This project is OSS, MIT licensed so you can pretty much do with it as you please. We will be running our own instance, targeted at people in the IT industry here: https://app.totallyampednow.com
+This project is OSS, MIT licensed so you can pretty much do with it as you please. 
 
 ## Contributions
 
