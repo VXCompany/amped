@@ -9,11 +9,11 @@ on:
   push:
     branches: [ main ]
     paths:
-    - Bookmarks/Api/**
+    - Bookmarks/**
   pull_request:
     branches: [ main ]
     paths:
-    - Bookmarks/Api/**
+    - Bookmarks/**
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ['6.0.x' ]
+        dotnet-version: ['7.0.x' ]
 
     steps:
       - name: Set up JDK 11 for SonarCloud
@@ -48,26 +48,26 @@ jobs:
           New-Item -Path ./.sonar/scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
       - name: Install dependencies
-        working-directory: './Bookmarks/Api'
+        working-directory: './Bookmarks'
         run: dotnet restore Amped.Bookmarks.sln
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: sh
-        working-directory: './Bookmarks/Api'
+        working-directory: './Bookmarks'
         run: |
           ../../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped_bookmarks_api" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
           dotnet build --configuration Release --no-restore Amped.Bookmarks.sln
       - name: Test
-        working-directory: './Bookmarks/Api'
+        working-directory: './Bookmarks'
         run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ Amped.Bookmarks.sln
       - name: Analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: sh
-        working-directory: './Bookmarks/Api'
+        working-directory: './Bookmarks'
         run: |
           ../../.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
   
@@ -95,7 +95,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: ./Bookmarks/Api
+          context: ./Bookmarks
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
