@@ -1,0 +1,38 @@
+
+/* Bookmark Input */
+input{
+  width:100%;
+}
+ 
+/* SVG */
+.wrap{
+     position: relative;
+     /* background-color: white;
+     background-image: linear-gradient(to right, #ffc02e , #bf32bb); */
+     padding: 64px;
+}
+
+.form{
+    width: 100%;
+}
+
+.form input {
+    color: white;
+    font-family: 'Gemunu Libre', sans-serif;
+    line-height: 100%;
+    background-color: rgba(255, 255, 255, 0.33);
+    font-size: 2em;
+    font-size: 2vw;
+    box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.5);
+    border: 1px solid transparent;
+    outline: none;
+    border-radius: 0.25em;
+    padding: 0.5em;
+}
+
+@media only screen and (max-width: 640px) {
+  .form input {
+    font-size: 6vw;
+  }
+}
+

@@ -1,0 +1,14 @@
+<div class="mobile-nav-bar__tabs">
+  <app-mobile-nav-bar-tab
+  path="/"
+  label="Feed"
+  (mobileNavBarTabClick)="onMobileNavBarTabClick($event)">
+  </app-mobile-nav-bar-tab>
+  <ng-container *ngIf="isAuthenticated$ | async">
+    <app-mobile-nav-bar-tab
+      path="/profile"
+      label="Profile"
+      (mobileNavBarTabClick)="onMobileNavBarTabClick($event)">
+    </app-mobile-nav-bar-tab>
+  </ng-container>
+</div>
