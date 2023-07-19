@@ -1,0 +1,21 @@
+<app-page-layout>
+  <ng-container>
+    <div class="wrap">
+      <div class="form">
+        <input [(ngModel)]="profile.nickname" #nickname type="text" value="Enter a nickname" /><br/><br/>
+        <input [(ngModel)]="profile.bio" #bio type="text" value="Enter a bio" />
+        <button *ngIf="this.isNewProfile" class="button__add" (click)="createProfile(nickname.value, bio.value)" >Create</button>
+        <button *ngIf="!this.isNewProfile" class="button__add" (click)="updateProfile(nickname.value, bio.value)">Save</button>
+      </div>
+      
+    </div>
+  </ng-container>
+  <ng-container *ngIf="code$ | async as code">
+    <div class="profile__details">
+      <app-code-snippet
+        [title]="title"
+        [code]="code"
+      ></app-code-snippet>
+    </div>
+  </ng-container>
+</app-page-layout>

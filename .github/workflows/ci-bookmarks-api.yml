@@ -49,7 +49,7 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
       - name: Install dependencies
         working-directory: './Bookmarks'
-        run: dotnet restore amped.bookmark.sln
+        run: dotnet restore amped-bookmark.sln
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -57,11 +57,12 @@ jobs:
         shell: sh
         working-directory: './Bookmarks'
         run: |
-          ../../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped_bookmarks_api" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
-          dotnet build --configuration Release --no-restore amped.bookmark.sln
+          ../.sonar/scanner/dotnet-sonarscanner begin /k:"VXCompany_amped_bookmarks_api" /o:"vxcompany-github" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml"
+          dotnet build --configuration Release --no-restore amped-bookmark.sln
       - name: Test
         working-directory: './Bookmarks'
-        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ amped.bookmark.sln
+        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ amped-bookmark.sln
+
       - name: Analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -69,7 +70,7 @@ jobs:
         shell: sh
         working-directory: './Bookmarks'
         run: |
-          ../../.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          ../.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
   
   publish_docker_images:
     needs: build
@@ -96,6 +97,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: ./Bookmarks
+          file: ./Bookmarks/amped-bookmark/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

@@ -1,1 +1,0 @@
-﻿public record CreateProfileRequest(string Nickname, string Bio);

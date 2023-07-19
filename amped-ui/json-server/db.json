@@ -1,0 +1,40 @@
+{
+  "api-bookmark": [
+    {
+      "id": "8a69850e-b680-460b-a207-5f0f2c9ac246",
+      "title": "Bookmark 0",
+      "description": "These are the voyages of the Starship Enterprise. Run a manual sweep of anomalous airborne or electromagnetic readings.",
+      "uri": "http://www.nu.nl/",
+      "read": false,
+      "owner": "google-oauth2|100000000000000000001"
+    },
+    {
+      "id": "0162dafe-2cd6-43eb-a5eb-a90572a0e5b0",
+      "title": "Bookmark 1",
+      "description": "Its continuing mission, to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no one has gone before.",
+      "uri": "http://www.fiets.nl/",
+      "read": false,
+      "owner": "google-oauth2|106008494241933327801"
+    },
+    {
+      "id": "a90572a0e5b0-2cd6-43eb-a5eb-0162dafe",
+      "title": "Bookmark 3",
+      "description": "We need to neutralize the homing signal. Each unit has total environmental control, gravity, temperature, atmosphere, light, in a protective field.",
+      "uri": "http://www.fiets.nl/",
+      "read": true,
+      "owner": "google-oauth2|100000000000000000001"
+    },
+    {
+      "id": "a90572a0e5b0-43eb-2cd6-a5eb-0162dafe",
+      "title": "Bookmark 4",
+      "description": "Sensors show energy readings in your area. We had a forced chamber explosion in the resonator coil. Field strength has increased by 3,000 percent.",
+      "uri": "http://www.fiets.nl/",
+      "read": false,
+      "owner": "google-oauth2|100000000000000000001"
+    }
+  ],
+  "api-profile": {
+    "nickname": "yurbur",
+    "bio": "my words"
+  }
+}

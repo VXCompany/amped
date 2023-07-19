@@ -1,0 +1,164 @@
+.amped-bookmarks {
+  /* responsive */
+
+  padding: 3.2rem 6.4rem;
+}
+
+.amped-bookmarks__title {
+  color: var(--white);
+  font-weight: 600;
+  text-align: center;
+
+  /* responsive */
+
+  margin-top: 0;
+  margin-bottom: 4.8rem;
+
+  font-size: 3.2rem;
+  line-height: 3.2rem;
+}
+
+.amped-bookmarks__grid {
+  display: grid;
+
+  /* responsive */
+
+  grid-template-columns: 1fr 1fr;
+  column-gap: 6.4rem;
+  row-gap: 6.4rem;
+}
+
+.amped-bookmark {
+  display: block;
+
+  /* background-color: var(--white); */
+  background-color: rgba(255, 255, 255, 0.33);
+
+  color: var(--black);
+
+  cursor: pointer;
+
+  transition: all 0.3s ease-in-out 0s;
+  
+
+  /* responsive */
+
+  padding: 4.8rem;
+
+  border-radius: 1.6rem;
+}
+
+.amped-bookmark:hover {
+  /* transform: scale(1.03); */
+  box-shadow: 0 8px 18px 0 rgba(0, 0, 0, 0.5);
+}
+
+.amped-bookmark__headline {
+  display: flex;
+  align-items: center;
+
+  margin-top: 0;
+
+  color: var(--black);
+  font-weight: 600;
+  letter-spacing: -0.05rem;
+
+  /* responsive */
+
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+}
+
+.amped-bookmark__icon {
+  /* responsive */
+
+  margin-right: 1.6rem;
+  height: 56px;
+}
+
+.amped-bookmark:hover .amped-bookmark__headline {
+  text-decoration: underline solid 2px var(--black);
+  text-underline-offset: 2px;
+
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.amped-bookmark__description {
+  margin: 0;
+
+  color: rgb(36, 36, 36);
+  font-weight: 500;
+
+  opacity: 0.7;
+
+  /* responsive */
+
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .amped-bookmarks__grid {
+    grid-template-columns: 1fr;
+    row-gap: 3.2rem;
+  }
+
+  .amped-bookmark {
+    padding: 3.2rem;
+    border-radius: 0.8rem;
+  }
+
+  .amped-bookmark__headline {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+
+  .amped-bookmark__icon {
+    height: 3.6rem;
+
+    margin-right: 1.6rem;
+  }
+
+  .amped-bookmark__description {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .amped-bookmarks {
+    padding: 1.6rem;
+  }
+
+  .amped-bookmarks__title {
+    font-size: 2rem;
+    line-height: 2.8rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .amped-bookmarks__grid {
+    grid-template-columns: 1fr;
+    row-gap: 1.6rem;
+  }
+
+  .amped-bookmark {
+    padding: 3.2rem;
+    border-radius: 0.8rem;
+  }
+
+  .amped-bookmark__headline {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+
+  .amped-bookmark__icon {
+    height: 3.6rem;
+
+    margin-right: 1.6rem;
+  }
+
+  .amped-bookmark__description {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+  }
+}

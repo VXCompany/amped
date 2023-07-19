@@ -1,0 +1,6 @@
+<div class="nav-bar__tabs">
+  <app-nav-bar-tab path="/" label="Feed"></app-nav-bar-tab>
+  <ng-container *ngIf="isAuthenticated$ | async">
+    <app-nav-bar-tab path="/profile" label="Profile"></app-nav-bar-tab>
+  </ng-container>
+</div>
