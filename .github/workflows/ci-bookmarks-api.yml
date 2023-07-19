@@ -94,10 +94,9 @@ jobs:
       
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        working-directory: './Bookmarks'
         with:
-          context: .
-          file: ./amped-bookmark/Dockerfile
+          context: ./Bookmarks
+          file: ./Bookmarks/amped-bookmark/amped-bookmark/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
