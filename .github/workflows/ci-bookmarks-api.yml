@@ -62,6 +62,7 @@ jobs:
       - name: Test
         working-directory: './Bookmarks'
         run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./ amped-bookmark.sln
+
       - name: Analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
