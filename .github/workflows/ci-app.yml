@@ -9,11 +9,11 @@ on:
   push:
     branches: [ main ]
     paths:
-    - Bookmarks/App/**
+    - amped-ui/**
   pull_request:
     branches: [ main ]
     paths:
-    - Bookmarks/App/**
+    - amped-ui/**
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: './Bookmarks/App'
+        working-directory: './amped-ui'
     strategy:
       matrix:
         node-version: [16.x]
