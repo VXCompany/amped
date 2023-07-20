@@ -48,7 +48,7 @@ jobs:
         echo AUTH0_CALLBACK_URL=$AUTH0_CALLBACK_URL > .env
         echo AUTH0_DOMAIN=$AUTH0_DOMAIN > .env
         echo AUTH0_CLIENT_ID=$AUTH0_CLIENT_ID > .env
-        echo AUTH0_AUDIENCEL=$AUTH0_AUDIENCE > .env
+        echo AUTH0_AUDIENCE=$AUTH0_AUDIENCE > .env
         cat .env
     - name: Build
       run: npm run build-prod
