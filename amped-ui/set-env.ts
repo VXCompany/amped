@@ -1,5 +1,4 @@
 const { writeFile } = require('fs');
-const { promisify } = require('util');
 const dotenv = require('dotenv');
 const { argv } = require('yargs');
 
@@ -15,9 +14,6 @@ if (!process.env['API_BOOKMARK_URL'] || !process.env['API_PROFILE_URL'] ||
       console.error('Not all the required environment variables were provided!');
       process.exit(-1);
 }
-
-
-const writeFilePromisified = promisify(writeFile);
 
 const targetPath = isProduction
    ? `./src/environments/environment.prod.ts`
@@ -42,11 +38,7 @@ const envConfigFile = `export const environment = {
 };
 `;
 
-(async () => {
-  try {
-    await writeFilePromisified(targetPath, envConfigFile);
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-})();
+writeFile(targetPath, envConfigFile, function (err:any) {
+  if (err) { 
+       console.log(err);
+}});
