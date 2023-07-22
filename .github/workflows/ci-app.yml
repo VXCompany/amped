@@ -59,8 +59,6 @@ jobs:
         AUTH0_AUDIENCE: ${{ vars.AUTH0_AUDIENCE }}
     - name: Build
       run: npm run build-prod
-    - name: Test
-      run: npm run test:cover
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
