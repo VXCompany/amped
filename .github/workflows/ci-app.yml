@@ -80,6 +80,9 @@ jobs:
     if: GitHub.event_name != 'pull_request'
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './amped-ui'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -115,8 +118,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: ./amped-ui
-          file: ./amped-ui/Dockerfile
+          context: .
+          file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
