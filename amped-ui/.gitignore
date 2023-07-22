@@ -747,5 +747,4 @@ build/
 env.json
 
 .vercel
-src/environments/environment.ts
 .angular
