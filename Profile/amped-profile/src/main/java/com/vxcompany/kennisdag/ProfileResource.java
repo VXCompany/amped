@@ -1,7 +1,9 @@
 package com.vxcompany.kennisdag;
 
+import io.quarkus.security.Authenticated;
 import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -14,6 +16,8 @@ import java.net.URI;
 
 @Path("/profile")
 @RolesAllowed("read:profile")
+@RequestScoped
+@Authenticated
 @NoCache
 public class ProfileResource {
     @Inject
