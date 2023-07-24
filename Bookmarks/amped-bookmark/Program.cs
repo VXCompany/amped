@@ -94,5 +94,16 @@ bookmarks.MapPost("/", async (CreateBookmarkRequest request, ClaimsPrincipal use
     return bookmark;
 }).RequireAuthorization("write:bookmark");
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<BookmarkContext>();
+    if (context.Database.GetPendingMigrations().Any())
+    {
+        context.Database.Migrate();
+    }
+}
+
 app.Run();
 
