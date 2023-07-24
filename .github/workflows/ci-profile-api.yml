@@ -6,14 +6,14 @@ name: CI - Profile - API
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   # and only for the Code directory of the repo
-  #push:
-  #  branches: [ main ]
-  #  paths:
-  #  - Profile/amped-profile/**
-  #pull_request:
-  #  branches: [ main ]
-  #  paths:
-  #  - Profile/amped-profile/**
+  push:
+    branches: [ main ]
+    paths:
+    - Profile/amped-profile/**
+  pull_request:
+    branches: [ main ]
+    paths:
+    - Profile/amped-profile/**
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -76,6 +76,6 @@ jobs:
         with:
           context: ./Profile/amped-profile
           file: ./Profile/amped-profile/Dockerfile
-          push: false
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
