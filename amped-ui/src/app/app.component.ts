@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from "@auth0/auth0-angular";
+import { CommonModule } from '@angular/common';
 import { PageLoaderComponent } from './shared';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, PageLoaderComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, PageLoaderComponent]
 })
 export class AppComponent {
   isAuth0Loading$ = this.authService.isLoading$;
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 }

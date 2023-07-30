@@ -1,26 +1,26 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { enableProdMode, importProvidersFrom } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
-import { RouterModule } from '@angular/router';
+import { importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
+import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import {
+  PreloadAllModules,
+  provideRouter,
+  //withDebugTracing,
+  withPreloading
+} from '@angular/router';
+import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { ROUTES } from './app/routes';
 import { environment } from './environments/environment';
 
-if (environment.production) {
-  enableProdMode();
-}
-
 bootstrapApplication(AppComponent, {
-  providers:[
+  providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
       multi: true,
     },
     importProvidersFrom(
-      RouterModule.forRoot(ROUTES),
-      HttpClientModule,
+      BrowserModule,
       AuthModule.forRoot({
         ...environment.auth0,
         httpInterceptor: {
@@ -33,6 +33,12 @@ bootstrapApplication(AppComponent, {
         },
         cacheLocation: 'localstorage',
       }),
+      HttpClientModule
+    ),
+    provideRouter(ROUTES,
+      withPreloading(PreloadAllModules),
+      //withDebugTracing(),
     ),
   ]
-});
+}).catch(err => console.error(err));
+
