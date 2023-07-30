@@ -11,7 +11,7 @@ export const environment = {
     useRefreshTokens: true,
   },
   api: {
-    bookmarkUrl: 'http://localhost:6063',
+    bookmarkUrl: 'http://localhost:6060',
     profileUrl: 'http://localhost:6060',
   },
 };
