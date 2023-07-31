@@ -13,5 +13,7 @@ export const environment = {
   api: {
     bookmarkUrl: 'http://localhost:6060',
     profileUrl: 'http://localhost:6060',
+    functionUrl: 'https://fa-amped-prod-westeu-001.azurewebsites.net',
+    functionKey: 'tjgEV6Gp6GKWiIPf43ZDXuLNyYBOP7pZIoAZNVk0jt4vAzFuWY2OZw=='
   },
 };

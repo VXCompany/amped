@@ -1,23 +1,18 @@
-const { writeFile } = require('fs');
+const {writeFile} = require('fs');
 const dotenv = require('dotenv');
-const { argv } = require('yargs');
+const {argv} = require('yargs');
 
 dotenv.config();
 
 const environment = argv.environment;
 const isProduction = environment === 'production';
 
-if (!process.env['API_BOOKMARK_URL'] || !process.env['API_PROFILE_URL'] ||
-    !process.env['AUTH0_DOMAIN'] || !process.env['AUTH0_CLIENT_ID'] ||
-    !process.env['AUTH0_AUDIENCE'] || !process.env['AUTH0_CALLBACK_URL']) 
-    {
-      console.error('Not all the required environment variables were provided!');
-      process.exit(-1);
+if (!process.env['API_BOOKMARK_URL'] || !process.env['API_PROFILE_URL'] || !process.env['AUTH0_DOMAIN'] || !process.env['AUTH0_CLIENT_ID'] || !process.env['AUTH0_AUDIENCE'] || !process.env['AUTH0_CALLBACK_URL']) {
+    console.error('Not all the required environment variables were provided!');
+    process.exit(-1);
 }
 
-const targetPath = isProduction
-   ? `./src/environments/environment.prod.ts`
-   : `./src/environments/environment.ts`;
+const targetPath = isProduction ? `./src/environments/environment.prod.ts` : `./src/environments/environment.ts`;
 
 const envConfigFile = `export const environment = {
   production: ${isProduction},
@@ -34,11 +29,14 @@ const envConfigFile = `export const environment = {
   api: {
     bookmarkUrl: '${process.env['API_BOOKMARK_URL']}',
     profileUrl: '${process.env['API_PROFILE_URL']}',
+    functionUrl: '${process.env['FUNCTION_URL']}',
+    functionKey: '${process.env['FUNCTION_KEY']}'
   },
 };
 `;
 
-writeFile(targetPath, envConfigFile, function (err:any) {
-  if (err) { 
-       console.log(err);
-}});
+writeFile(targetPath, envConfigFile, function (err: any) {
+    if (err) {
+        console.log(err);
+    }
+});

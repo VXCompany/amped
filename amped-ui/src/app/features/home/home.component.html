@@ -1,26 +1,28 @@
 <app-page-layout>
-  <ng-container *ngIf="isAuthenticated$ | async; else unAuthenticated">
-    <div class="wrap">
-      <div class="form">
-        <input #bookmark type="text" value="Enter your item" />
-        <button class="button__add" (click)="addBookmark(bookmark.value)" >Add</button>
-      </div>
-      
-    </div>
-  </ng-container>
 
-  <div class="amped-bookmarks">
-    <div class="amped-bookmarks__grid">
-      <app-amped-bookmark *ngFor="let item of bookmarks"
-          title={{item.title}}
-          description={{item.description}}
-          resourceUrl={{item.uri}}
-          [read]=item.read
-        ></app-amped-bookmark>
+    <div class="wrap">
+        <div class="form">
+            <input #bookmark type="text" value="Enter your item"/>
+            <ng-container *ngIf="isAuthenticated$ | async; else unAuthenticated">
+                <button (click)="addBookmark(bookmark.value)" class="button__add">Add</button>
+            </ng-container>
+        </div>
+
     </div>
-  </div>
+
+
+    <div class="amped-bookmarks">
+        <div class="amped-bookmarks__grid">
+            <app-amped-bookmark *ngFor="let item of bookmarks"
+                                [read]=item.read
+                                description={{item.description}}
+                                resourceUrl={{item.uri}}
+                                title={{item.title}}
+            ></app-amped-bookmark>
+        </div>
+    </div>
 </app-page-layout>
 
 <ng-template #unAuthenticated>
-  <!-- <h6>Sign up or login to add your own bookmarks!</h6> -->
+    <!-- <h6>Sign up or login to add your own bookmarks!</h6> -->
 </ng-template>
