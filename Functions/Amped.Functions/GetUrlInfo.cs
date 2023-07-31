@@ -76,7 +76,7 @@ public static class GetUrlInfo
         }
         catch (HttpRequestException e)
         {
-            return new BadRequestObjectResult("Please pass a valid url on the query string");
+            return new NoContentResult();
         }
         catch (Exception e)
         {
