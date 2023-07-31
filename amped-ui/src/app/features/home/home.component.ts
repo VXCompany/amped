@@ -20,7 +20,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     private debounceTime = 500;
     private destroy$ = new Subject<void>(); // To unsubscribe from the fromEvent observable
 
-    constructor(private authService: AuthService, public bookmarkService: BookmarkService, public urlInfoService: UrlInfoService, private elementRef: ElementRef) {
+    constructor(private authService: AuthService, public bookmarkService: BookmarkService, public urlInfoService: UrlInfoService) {
     }
 
     ngOnInit(): void {
