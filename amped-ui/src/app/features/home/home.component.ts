@@ -4,17 +4,7 @@ import {AmpedBookmarkComponent} from '@app/shared';
 import {AuthService} from "@auth0/auth0-angular";
 import {CommonModule} from '@angular/common';
 import {BookmarkModel, BookmarkService, UrlInfoService} from '@app/core';
-import {
-    catchError,
-    debounceTime,
-    distinctUntilChanged,
-    EMPTY,
-    fromEvent, of,
-    Subject,
-    switchMap,
-    takeUntil,
-    throwError
-} from "rxjs";
+import {debounceTime, distinctUntilChanged, fromEvent, Subject, switchMap, takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
 
 @Component({
@@ -74,7 +64,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
             switchMap((query: string) => this.urlInfoService.getInfo(query)),
             takeUntil(this.destroy$) // Unsubscribe when the component is destroyed
         ).subscribe((response) => {
-            const { data, error } = response;
+            const {data, error} = response;
             if (data) {
                 console.log(data);
             }
