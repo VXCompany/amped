@@ -64,7 +64,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
             switchMap((query: string) => this.urlInfoService.getInfo(query)),
             takeUntil(this.destroy$) // Unsubscribe when the component is destroyed
         ).subscribe((response) => {
-            const {data, error} = response;
+            const {data} = response;
             if (data) {
                 console.log(data);
             }
