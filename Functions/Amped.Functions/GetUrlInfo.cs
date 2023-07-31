@@ -28,7 +28,7 @@ public static class GetUrlInfo
         HttpRequest req, ILogger log)
     {
         log.LogInformation("GetUrlInfo HTTP trigger function processed a request.");
-        
+
         try
         {
             // Authentication in JWT / Bearer scenarios
@@ -37,12 +37,12 @@ public static class GetUrlInfo
             {
                 return new UnauthorizedResult();
             }
-                
+
             var identity = await ValidateAccessTokenAsync(accessToken);
-            
+
             // Authentication in App Service Easy Auth scenarios
             // var identity = ClaimsPrincipalParser.Parse(req);
-            
+
             var isAuthenticated = identity is {Identity.IsAuthenticated: true};
             if (isAuthenticated)
             {
@@ -56,11 +56,11 @@ public static class GetUrlInfo
             // At this point the caller is authenticated
             // and we can gather the claims information
             var claimsList = req.HttpContext.User.Claims.ToList();
-            
+
             // We now know who or what we are dealing with
             // so we have identity information that can be used for further authorization
             // and we can also use the claims information to make decisions
-            
+
             // Your actual function code goes here
             string url = req.Query["url"];
             if (string.IsNullOrWhiteSpace(url))
@@ -74,17 +74,21 @@ public static class GetUrlInfo
 
             return new OkObjectResult(webInfo);
         }
+        catch (HttpRequestException e)
+        {
+            return new BadRequestObjectResult("Please pass a valid url on the query string");
+        }
         catch (Exception e)
         {
             log.LogError(e, "Error validating request");
-            
+          
             return new UnauthorizedResult();
         }
     }
-    
+
     private static async Task<ClaimsPrincipal> ValidateAccessTokenAsync(string accessToken)
     {
-        var audience = Environment.GetEnvironmentVariable("MyAudience");
+        var audience = Environment.GetEnvironmentVariable("Audience");
         var issuer = Environment.GetEnvironmentVariable("Issuer");
 
         var configManager =
@@ -106,7 +110,7 @@ public static class GetUrlInfo
         var claimsPrincipal = tokenValidator.ValidateToken(accessToken, validationParameters, out _);
         return claimsPrincipal;
     }
-    
+
     private static string GetAccessToken(HttpRequest req)
     {
         var authorizationHeader = req.Headers?["Authorization"];
@@ -124,13 +128,13 @@ public static class WebScraper
     public static async Task<WebInfoResource> GetWebInfoAsync(Uri uri)
     {
         var htmlDocument = new HtmlDocument();
-        
+
         var httpResponse = await HttpClient.GetAsync(uri);
         await EnsureSuccessStatusCodeAsync(httpResponse);
-        
+
         var pageHtml = await httpResponse.Content.ReadAsStringAsync();
         htmlDocument.LoadHtml(pageHtml);
-        
+
         var titleNode = htmlDocument.DocumentNode.SelectSingleNode("//title");
 
         var response = new WebInfoResource
@@ -146,11 +150,11 @@ public static class WebScraper
     {
         if (httpResponse.IsSuccessStatusCode)
             return;
-        
+
         var statusCode = httpResponse.StatusCode;
         var httpContent = await httpResponse.Content.ReadAsStringAsync();
         var reasonPhrase = httpResponse.ReasonPhrase;
-        
+
         throw new HttpRequestException(
             $"The HTTP status code of the response was not expected ({statusCode}): {reasonPhrase} - {httpContent}");
     }
@@ -166,22 +170,16 @@ public static class ClaimsPrincipalParser
 {
     private class ClientPrincipalClaim
     {
-        [JsonPropertyName("typ")]
-        public string Type { get; set; }
-        [JsonPropertyName("val")]
-        public string Value { get; set; }
+        [JsonPropertyName("typ")] public string Type { get; set; }
+        [JsonPropertyName("val")] public string Value { get; set; }
     }
 
     private class ClientPrincipal
     {
-        [JsonPropertyName("auth_typ")]
-        public string IdentityProvider { get; set; }
-        [JsonPropertyName("name_typ")]
-        public string NameClaimType { get; set; }
-        [JsonPropertyName("role_typ")]
-        public string RoleClaimType { get; set; }
-        [JsonPropertyName("claims")]
-        public IEnumerable<ClientPrincipalClaim> Claims { get; set; }
+        [JsonPropertyName("auth_typ")] public string IdentityProvider { get; set; }
+        [JsonPropertyName("name_typ")] public string NameClaimType { get; set; }
+        [JsonPropertyName("role_typ")] public string RoleClaimType { get; set; }
+        [JsonPropertyName("claims")] public IEnumerable<ClientPrincipalClaim> Claims { get; set; }
     }
 
     public static ClaimsPrincipal Parse(HttpRequest req)
@@ -193,14 +191,14 @@ public static class ClaimsPrincipalParser
             var data = header[0];
             var decoded = Convert.FromBase64String(data);
             var json = Encoding.UTF8.GetString(decoded);
-            principal = JsonSerializer.Deserialize<ClientPrincipal>(json, 
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            principal = JsonSerializer.Deserialize<ClientPrincipal>(json,
+                new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
         }
 
-        var identity = new ClaimsIdentity(principal.IdentityProvider, 
+        var identity = new ClaimsIdentity(principal.IdentityProvider,
             principal.NameClaimType, principal.RoleClaimType);
         identity.AddClaims(principal.Claims.Select(c => new Claim(c.Type, c.Value)));
-        
+
         return new ClaimsPrincipal(identity);
     }
 }
