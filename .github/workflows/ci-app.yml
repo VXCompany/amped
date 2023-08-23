@@ -40,23 +40,6 @@ jobs:
         cache-dependency-path: '**/package-lock.json'
     - name: Install dependencies
       run: npm ci
-    - name: Create env file
-      run: |
-        touch .env
-        echo API_BOOKMARK_URL=$API_BOOKMARK_URL >> .env
-        echo API_PROFILE_URL=$API_PROFILE_URL >> .env
-        echo AUTH0_CALLBACK_URL=$AUTH0_CALLBACK_URL >> .env
-        echo AUTH0_DOMAIN=$AUTH0_DOMAIN >> .env
-        echo AUTH0_CLIENT_ID=$AUTH0_CLIENT_ID >> .env
-        echo AUTH0_AUDIENCE=$AUTH0_AUDIENCE >> .env
-        cat .env
-      env:
-        API_BOOKMARK_URL: ${{ vars.API_BOOKMARK_URL }}
-        API_PROFILE_URL: ${{ vars.API_PROFILE_URL }}
-        AUTH0_CALLBACK_URL: ${{ vars.AUTH0_CALLBACK_URL }}
-        AUTH0_DOMAIN: ${{ vars.AUTH0_DOMAIN }}
-        AUTH0_CLIENT_ID: ${{ vars.AUTH0_CLIENT_ID }}
-        AUTH0_AUDIENCE: ${{ vars.AUTH0_AUDIENCE }}
     - name: Build
       run: npm run build-prod
     - name: SonarCloud Scan
@@ -86,23 +69,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      - name: Create env file
-        run: |
-          touch .env
-          echo API_BOOKMARK_URL=$API_BOOKMARK_URL >> .env
-          echo API_PROFILE_URL=$API_PROFILE_URL >> .env
-          echo AUTH0_CALLBACK_URL=$AUTH0_CALLBACK_URL >> .env
-          echo AUTH0_DOMAIN=$AUTH0_DOMAIN >> .env
-          echo AUTH0_CLIENT_ID=$AUTH0_CLIENT_ID >> .env
-          echo AUTH0_AUDIENCE=$AUTH0_AUDIENCE >> .env
-          cat .env
-        env:
-          API_BOOKMARK_URL: ${{ vars.API_BOOKMARK_URL }}
-          API_PROFILE_URL: ${{ vars.API_PROFILE_URL }}
-          AUTH0_CALLBACK_URL: ${{ vars.AUTH0_CALLBACK_URL }}
-          AUTH0_DOMAIN: ${{ vars.AUTH0_DOMAIN }}
-          AUTH0_CLIENT_ID: ${{ vars.AUTH0_CLIENT_ID }}
-          AUTH0_AUDIENCE: ${{ vars.AUTH0_AUDIENCE }}
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:

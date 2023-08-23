@@ -1,0 +1,20 @@
+{
+  "domain": "vxcompany-kennisdag.eu.auth0.com",
+  "clientId": "bqdP0OizKP5LFH7lRuZfqokdbf54Y4sO",
+  "authorizationParams": {
+    "audience": "https://totallyamped.tech",
+    "redirect_uri": "http://localhost:4040/callback",
+    "scope": "openid profile email offline_access write:bookmark read:profile write:profile"
+  },
+  "useRefreshTokens": true,
+  "httpInterceptor": {
+    "allowedList": [
+      {
+        "uri": "http://localhost:6060/bookmark",
+        "httpMethod": "POST"
+      },
+      "http://localhost:6060/profile"
+    ]
+  },
+  "cacheLocation": "localstorage"
+}

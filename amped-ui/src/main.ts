@@ -1,44 +1,66 @@
-import { importProvidersFrom } from '@angular/core';
-import { AppComponent } from './app/app.component';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import {APP_INITIALIZER} from '@angular/core';
+import {AppComponent} from './app/app.component';
+import {bootstrapApplication} from '@angular/platform-browser';
 import {
-  PreloadAllModules,
-  provideRouter,
-  //withDebugTracing,
-  withPreloading
-} from '@angular/router';
-import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
-import { ROUTES } from './app/routes';
-import { environment } from './environments/environment';
+    HttpBackend,
+    HttpClient,
+    provideHttpClient,
+    withInterceptors
+} from "@angular/common/http";
+import {PreloadAllModules, provideRouter, withPreloading} from '@angular/router';
+import {
+    AuthClientConfig,
+    AuthConfig,
+    authHttpInterceptorFn,
+    provideAuth0
+} from '@auth0/auth0-angular';
+import {ROUTES} from './app/routes';
+import {firstValueFrom} from "rxjs";
+import {ConfigService} from "./app/core/services/config.service";
+
+function authConfigInitializer(
+    handler: HttpBackend,
+    config: AuthClientConfig
+) {
+    return async () => {
+        const httpClient = new HttpClient(handler);
+
+        try {
+            const loadedConfig = await firstValueFrom(httpClient.get('/assets/config-auth.json'));
+            config.set(<AuthConfig>loadedConfig);
+        } catch (error) {
+            console.error('Error loading config:', error);
+        }
+    };
+}
+
+function apiConfigInitializer(configService: ConfigService) {
+    return () => configService.loadConfigFromServer();
+}
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi: true,
-    },
-    importProvidersFrom(
-      BrowserModule,
-      AuthModule.forRoot({
-        ...environment.auth0,
-        httpInterceptor: {
-          allowedList: [
-            {
-              uri: `${environment.api.bookmarkUrl}/bookmark`,
-              httpMethod: "POST"
-            },
-            `${environment.api.profileUrl}/profile`],
+    providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: authConfigInitializer,
+            deps: [HttpBackend, AuthClientConfig],
+            multi: true,
         },
-        cacheLocation: 'localstorage',
-      }),
-      HttpClientModule
-    ),
-    provideRouter(ROUTES,
-      withPreloading(PreloadAllModules),
-      //withDebugTracing(),
-    ),
-  ]
+        ConfigService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: apiConfigInitializer,
+            deps: [ConfigService],
+            multi: true,
+        },
+        provideAuth0(),
+        provideHttpClient(
+            withInterceptors([authHttpInterceptorFn])
+        ),
+        provideRouter(ROUTES,
+            withPreloading(PreloadAllModules),
+            //withDebugTracing(),
+        ),
+    ]
 }).catch(err => console.error(err));
 
