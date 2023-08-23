@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "env": "ts-node set-env.ts",
-    "start": "npm run env && ng serve",
-    "build": "npm run env -- --environment=development && ng build --configuration development",
-    "build-prod": "npm run env -- --environment=production && ng build --configuration production",
+    "start": "ng serve",
+    "build": "ng build --configuration development",
+    "build-prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "api": "json-server --host 0.0.0.0 --port 6060 --watch json-server/db.json --routes json-server/routes.json"
   },
@@ -30,7 +29,6 @@
     "@angular/cli": "~16.1.6",
     "@angular/compiler-cli": "^16.1.7",
     "@types/jasmine": "~4.3.0",
-    "dotenv": "^16.3.1",
     "jasmine-core": "~4.6.0",
     "json-server": "^0.17.3",
     "karma": "~6.4.0",

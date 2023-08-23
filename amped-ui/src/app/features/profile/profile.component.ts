@@ -7,7 +7,6 @@ import { AmpedProfileModel, ProfileService } from '@app/core';
 import { FormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
-
 @Component({
   standalone: true,
   imports: [CommonModule, PageLayoutComponent, CodeSnippetComponent, FormsModule],
